@@ -1,0 +1,55 @@
+<style>
+    .topic-container {
+        width: 30%;
+        float: right;
+        margin: 10px 0px;
+    }
+
+    .post-container {
+        width: 70%;
+        float: left;
+    }
+
+    @media screen and (max-width: 720px) {
+        .post-container {
+            width:100%;
+            float: none;
+        }
+
+        .topic-container {
+            width:100%;
+            float: none;
+        }
+    }
+</style>
+
+<h4 style="display:flex; align-items:center; margin:10px;">
+	<img src="__rooturl/assets/images/icons/inbox.png" alt="Users icon" style="width:40px; marging:0; height:auto;">
+	inbox <¡inbox_size>
+</h4>
+
+<p style="color:#ffffffb3; mix-blend-mode:difference; margin:10px;">Note: Inbox data is public, dont send private info here</p>
+<article>
+	<h3>New message</h3>
+	<script>
+		function submitbutton() {
+            var title = document.getElementById("title").value;
+            var content = document.getElementById("content").value;
+            var user = document.getElementById("toUSER").value;
+            window.location = ("__rooturl/inbox/new?u="+user+"&t="+title+"&c="+content);
+        }
+	</script>
+    <div class="post-container" style="">
+        @<input style="width:90%;" type="text" id="toUSER" placeholder="target username">
+        <input style="width:90%;" type="text" id="title" placeholder="Title">
+        <br>
+        <textarea style="width:90%;" rows="5" placeholder="Content" id="content"></textarea>
+    </div>
+    <div class="topic-container" style="">
+        <label for="topics">From: <i style="color:gray;">@<¡user_username></i></label>
+		<br>
+        <label for="targetuser">To: </label>
+    </div>
+    <br>
+    <input type="button" id="submit" value="submit" onclick=' submitbutton();'>
+</article>

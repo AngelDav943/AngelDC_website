@@ -1,0 +1,151 @@
+<center id="Welcomeback" style="mix-blend-mode:difference; padding:50px 0px 10px;">
+    <img src="__rooturl/assets/images/icons/home.png" alt="Home icon" style="width:100px; height: auto;">
+    <h2 >Welcome back <a href="__rooturl/users/<¡user_id>">@<¡user_username>!</a></h2>
+</center>
+
+<div id="user">
+    <div id="user-article" style=" padding:20px 0px; display:flex; justify-content:center;">
+        <a class="button" href="__rooturl/users/<¡user_id>">Your profile page</a>
+        <a class="button" href="__rooturl/Forum/">Forum posts</a>
+        <a class="button" href="__rooturl/chat">Chat around!</a>
+    </div>
+</div>
+
+<script id="script">
+    if ('<¡user_displayname>' == "") {
+        document.getElementById('user').innerHTML = ''
+        document.getElementById('Welcomeback').innerHTML = '<h2>Welcome Guest!</h3>'
+    }
+    document.getElementById('script').outerHTML = ''
+</script>
+
+<style>
+    .article-maincontainer {
+        overflow:auto;
+    }
+
+    .article-maincontainer li {
+        height:calc(100% - 5px);
+    }
+
+    .article-maincontainer li.left {
+        float:left;
+        width:calc(60% - 5px);
+    }
+
+    .article-maincontainer li.right {
+        float:right; 
+        width:calc(40% - 5px);
+    }
+
+    @media screen and (max-width: 950px) {
+        .article-maincontainer {
+            height:auto;
+        }
+
+        .article-maincontainer li.left {
+            float:none;
+            width:100%;
+        }
+
+        .article-maincontainer li.right {
+            float:none; 
+            width:100%;
+        }
+    }
+</style>
+
+
+
+<div class="article-maincontainer" style="">
+    <li class="left">
+        
+        <div id="latest_post">
+			<h3 style="padding:0px 20px;">Latest forum post</h3>
+			<article style="background-color:#303033;">
+				<li style="float:right; width:45%; text-align:right;">
+					<div style='padding: 5px 20px; background-color:#494949; border-radius:5vw;'>
+						<h4><br></h4>
+					</div>
+					<p style ="padding:0px 0px;color:#cccccc;" ><br></p>
+					<p style ="padding:0px 0px 5px; font-size: 65%; color:gray;"><br></p>
+				</li>
+				<li style="width:65%;">
+					<noscript>This feature cant run without javascript.</noscript>
+					<h3><br></h3>
+					<br>
+					<h3><br></h3>
+				</li>
+			</article>
+		</div>
+        <article style="height:calc(100% - 40px)">
+            <p>Welcome to this website, made by <a href="__rooturl/users/1">@Angel</a>.<p>
+            <br>
+            <br>
+            <p>I made this website to just put tests i made with javascript and some other things, maybe i will add more things soon.</p>
+            <p>I know lua, javascript and some c#, and i know some 3D modelling.</p>
+            <br>
+            <p></p>
+        </article>
+    </li>
+    <li class="right">
+        <h3 style="padding:0px 20px;"><br></h3>
+		<article>
+            <h3>Other pages</h3>
+			<div style="margin:10px 0px;">
+        		<a class="button" style="display:block;" href="__rooturl/andec">Andec Studios</a>
+        		<a class="button" style="display:block;" href="https://dev.angeldc943.repl.co/">dev website</a>
+
+			</div>
+        </article>
+        <article>
+            <h3>People online</h3>
+            <div id="users_online"></div>
+        </article>
+        <article>
+            <h3>03-07-2021 Changes</h3>
+            <b>Inbox!</b>
+        </article>
+    </li>
+</div>
+
+<script>
+    function reload_post() {
+        fetch('__rooturl/api/forum/latest').then(res => {
+            res.json().then(json => {
+                fetch('__rooturl/api/users/get?id='+json.user).then(userres => {
+                    userres.json().then(userjson => {
+                        userjson = userjson[0]
+                        fetch("__rooturl/assets/templates/simpletextpost.html").then(data => {
+                            return data.text()
+                        }).then(html => {
+                            let message = html.replace(new RegExp("_"+"_rooturl","g"),"__rooturl")
+                            message = message.replace(/<¡topic>/g,json.topic).replace(/<¡postid>/g,json.index+1)
+                            message = message.replace(/<¡title>/g,json.title.substring(0,15)).replace(/<¡date>/g,json.date)
+                            message = message.replace(/<¡user>/g,userjson.name).replace(/<¡userdisplay>/g,userjson.displayname)
+                            document.getElementById('latest_post').innerHTML = '<h3 style="padding:0px 20px;">Latest forum post</h3>'+message
+                        })
+                    })
+                })
+            })
+        })
+        setTimeout(() => {
+            reload_post();
+        },5000)
+    }
+    reload_post();
+</script>
+
+<script>
+    function reload_users() {
+        fetch('__rooturl/api/users/online?repeat=false&value=name').then(userres => {
+            userres.json().then(users => {
+                document.getElementById('users_online').innerHTML = users
+            })
+        })
+        setTimeout(() => {
+            reload_users();
+        },5000)
+    }
+    reload_users();
+</script>

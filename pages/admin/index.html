@@ -1,0 +1,27 @@
+<h3 style="margin: 0px 10px;" id="currenttopic"></h3>
+
+<br>
+<article class="touch" style="padding:5px; margin:10px 0px;">
+    <h3>Greetings @<¡user_username></h3>
+    <p style="padding:10px;">Welcome back to the admin panel</p>
+</article>
+<article class="touch">
+    <p>Broadcast notification to everyone online</p>
+    <input id="message" type="text" placeholder="Message">
+    <input id="color" type="text" placeholder="Color code">
+    <input type="button" value="Broadcast message" onclick="broadcast()">
+    <script>
+        let message = document.getElementById("message")
+        let color = document.getElementById("color")
+        function broadcast() {
+            socket.emit("send_annoucement",{
+                "message":message.value,
+                "color":color.value}
+            )
+        }
+    </script>
+</article>
+<article class="touch">
+    <p>People online</p>
+    <¡peopleonline>
+</article>

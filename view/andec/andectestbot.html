@@ -1,0 +1,65 @@
+
+<article>
+    <p>Connection to bot is:</p>
+    <p id="onlineStatus"></p>
+</article>
+
+<article>
+    <img style="max-height:123px; border-radius:100%; float: left;" src="__rooturl/assets/images/boxl_spin.gif">
+    <p>Message without context displayed by <b>AndecTestBot</b></p>
+    <br>
+    <p id="message"><noscript>This feature cant run without javascript.</noscript></p>
+    
+    <br><br>
+    <p id="timertext"></p>
+    <p>The bot selects a random message and displays it here</p>
+    
+</article>
+
+<article>
+    <p id="serverJoined"> AndecTestBot is in [number] servers</p>
+</article>
+
+<script>
+    var timer = document.getElementById("timertext")
+    var message = document.getElementById('message')
+    var online = document.getElementById('onlineStatus')
+    var serverJoined = document.getElementById('serverJoined')
+    var url = 'https://AndecDiscordBot-Handler-1.angeldc943.repl.co/'
+    var getdataurl = 'getBotData'
+    var cooldown = 15
+    timer.innerHTML = ' Message refreshed '+ cooldown/1000 +' seconds ago.'
+    function update() {
+        var t = 0
+        fetch(url).catch(error => {
+            console.log(error == undefined)
+            if (error) online.innerHTML = 'offline'
+        });
+        fetch(url+getdataurl).then(res => {
+            res.json().then(resp => {
+                serverJoined.innerHTML = "<b>[serverCount]</b> not found, wait for auto-reload"
+                message.innerHTML = "<b>[message]</b> not found or deleted, wait for auto-reload"
+                console.log("status updated")
+                if (resp.message) message.innerHTML = String(resp.message)
+                if (resp.serversOn) serverJoined.innerHTML = 'AndecTestBot is in '+String(resp.serversOn)+' servers.'
+                if (resp) online.innerHTML = 'online'
+            });
+        });
+        
+        function reloadtimeout() {
+            setTimeout(function() {
+                t += 1
+                timer.innerHTML = ' Message refreshed '+ t +' seconds ago.'
+                if (t >= cooldown ) {
+                    update();
+                } else {
+                    reloadtimeout()
+                }
+            }, 1000)
+        }
+        reloadtimeout()
+    }
+    update();
+    
+    
+</script>

@@ -1,0 +1,21 @@
+Looks like this is your first time in here!
+
+Here in the inbox you can send and recieve messages from other people! sometimes you can get notifications from the website like when someone mentions you or things like that!
+*(mentions, new thing to add soon)* 
+ 
+**How you make a new message?**  
+You can make a new message by clicking in the button of new message 
+https://angeldc943.repl.co/assets/images/INBOX_newmessage_image.png 
+After that you can make a new message by 
+First put the username of the person you want to send the message to (it needs to be username and not displayname) 
+and after that now you can write the message you want to send! 
+https://angeldc943.repl.co/assets/images/INBOX_newmessage2_image.png 
+ 
+**Things that you can do:** 
+You make text bold with ** 
+You can make italic text with *
+
+If you need more information about the inbox you can ask about it in the discord group! or by dming me 
+Angeldav943#5472 
+
+**Automatic message by bot** \n

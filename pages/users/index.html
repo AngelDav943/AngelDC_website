@@ -1,0 +1,50 @@
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        padding:10px 0px;
+    }
+
+    #user-box div{
+        border-color: #00000000;
+        background-color: rgba(0, 0, 0, 0.226);
+        text-align:center;
+        margin:2px;
+        padding:10px;
+        border-style: solid;
+    }
+
+    #user-box div img{
+        border-color: #00000000;
+        border-style: solid;
+    }
+
+    #user-box div img.online{
+        border-color: #39f06e;
+        border-style: solid;
+    }
+
+    #user-box:hover div{
+        border-color: #ff7800;
+    }
+
+    @media screen and (max-width: 850px) {
+        .grid-container {
+            display:block;
+            padding:0px;
+        }
+
+        #user-box div {
+            margin:0px 0px 5px;
+            border-style: none;
+            border-top-style: solid;
+            border-bottom-style: solid;
+            border-radius: 0px;
+        }
+    }
+
+</style>
+<center style="marging:5px;">
+    <img src="__rooturl/assets/images/icons/users.png" alt="Users icon" style="width:60px; marging:0; height:auto;">
+    <h4>Users: <¡accountcount></h4>
+</center>

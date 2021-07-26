@@ -1,0 +1,162 @@
+<!--<script src="__rooturl/public/logic/postmanager.js"></script>-->
+
+<style>
+    .topic-container {
+        width: 30%;
+        float: left;
+        margin: 10px 0px;
+    }
+
+    .main-container *{
+        transition: 0.3s;
+    }
+
+    .topic-container a.button.simple{
+        width:90%;
+        text-align: left;
+    }
+
+    .topic-container a.button.simple:hover{
+        width:95%;
+        /*text-align: center;*/
+    }
+
+    
+    .return {
+        display: none;
+    }
+
+    .post-container {
+        width: 70%;
+        float: right;
+    }
+
+    .post-container a.invisible article {
+        border-right-style: none;
+        border-radius: 10px 0px 0px 10px;
+    }
+
+    .post-container a.invisible:hover article {
+        border-color:#ff7800;
+    }
+
+    .invisible {
+        display: none;
+    }
+
+    .show{
+        display: block;
+    }
+
+    a.invisible {
+        opacity: 0;
+    }
+    a.show {
+        opacity: 1;
+        transition: opacity 1s;
+        100% {
+
+        }
+    }
+
+    @media screen and (max-width: 720px) {
+        
+        .post-container {
+            width:100%;
+            display: none;
+            float: none;
+        }
+
+        .topic-container {
+            width:100%;
+            float: none;
+        }
+
+        .topic-container a.button.simple{
+            width:100%;
+        }
+        
+        .topic-container.hide {
+            display: none;
+        }
+
+        .post-container.show {
+            display: block;
+        }
+
+        .post-container a.invisible article {
+            border-right-style: none;
+            border-left-style: none;
+            border-radius: 0px;
+        }
+
+        .post-container.show .return {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function hideall() {
+        let children = document.getElementsByClassName('post-container')[0].children
+        for (let i = 0; i < children.length; i++) {
+            children[i].classList.toggle("show",false)
+        }
+    }
+
+    function showelements(name,status) {
+        hideall();
+        let elementstoshow = document.getElementsByName(name)
+
+        document.getElementsByClassName('topic-container')[0].classList.toggle("hide",true)
+        document.getElementsByClassName('post-container')[0].classList.toggle("show",true)
+
+        document.getElementById('currenttopic').innerHTML = "Topic: " + name
+
+        for (let i = 0; i < elementstoshow.length; i++) {
+            elementstoshow[i].classList.toggle("show",status)
+        }
+    }
+
+    function back() {
+        document.getElementsByClassName('topic-container')[0].classList.toggle("hide",false)
+        document.getElementsByClassName('post-container')[0].classList.toggle("show",false)
+    }
+</script>
+
+<article class="main-container" style="padding:0px; position:relative; z-index:0;">
+    <div class="topic-container" style="">
+        <div>
+            <h3 style="width:calc(60% - 20px); margin:5px 10px;">Topics</h3>
+            <a class="button simple" onclick="showelements('general')" style="display:block;">General</a>
+            <a class="button simple" onclick="showelements('off-topic')" style="display:block;">Off Topic</a>
+            <a class="button simple" onclick="showelements('random')" style="display:block;">Random</a>
+            <a class="button simple" onclick="showelements('itteblox')" style="display:block;">Itteblox</a>
+            <a class="button simple" onclick="showelements('roblox')" style="display:block;">Roblox</a>
+        </div>
+        <div>
+            <h3>Other options</h3>
+            <a class="button simple" href="__rooturl/forum/new" style="display:block;">New post</a>
+        </div>
+    </div>
+    <div class="post-container" style="">
+        <article class="alert" style="margin:10px;">
+            <p style="float:right;">Forums are not fully finished expect bugs</p>
+        </article>
+        <a class="simple return" onclick="back()" style="width:100%;">Return</a>
+        <h3 style="margin: 0px 10px;" id="currenttopic"></h3>
+        <a class="invisible show" name="<topic>" id="<topic>">
+            <br>
+            <article style="background-color:#303033; margin:10px 0px;">
+                <h3>Welcome to the forum @<user_username>!</h3>
+            </article>
+        </a>
+        <a class="invisible show" name="<topic>" id="<topic>">
+            <article style="background-color:#303033; margin:10px 0px;">
+                <p>Click on any topic to see posts made by other people!</p>
+                <p>If you want to create a post in the forum you can click on <b>New post</b> in other options!</p>
+                <br>
+                <p>If you find any bug you can notify me in the discord group</p>
+            </article>
+            <br>
+        </a>

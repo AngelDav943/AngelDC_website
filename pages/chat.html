@@ -1,0 +1,83 @@
+<style>
+    article article {
+        border-right-style: none;
+        border-left-style: none;
+        border-radius: 0px;
+    }
+</style>
+
+<floatbar class="left" id="online_users">
+
+</floatbar>
+
+<script>
+    var frame = document.getElementById("online_users")
+    var url = '__rooturl/api/users/online?page=chat&repeat=false&value=name'
+    function online_update() {
+        setTimeout(() => {
+            fetch(url).then(res => {
+                res.json().then(usersarray => {
+                    frame.innerHTML = ''
+                    usersarray.forEach(user => {
+                        frame.innerHTML += user+'<br>'
+                    });
+                });
+            });
+        }, 750);
+        
+        setTimeout(() => {
+            online_update();
+        }, 10000);
+    }
+    online_update();
+</script>
+
+<article id="chat_container" style="height:450px; padding:10px 0px; margin-bottom:5px;">
+    <article class="touch">
+        <p>Welcome @<¡user_username> to the chat!</p>
+    </article>
+</article>
+
+<div>
+    <input id="message" type="text" style="width:90%;" onkeypress="if (event.keyCode == 13) broadcast_message();">
+    <a class="button simple" type="button" style="width:10%;" onclick="broadcast_message()">Send</a>
+</div>
+
+<script>
+    socket.on("connection_status", (arg) => {
+        let message = '<article class="touch" style="padding:10px;" background-color:'+arg.color+'>'+
+            '<h4>'+arg.title+' <i style="float:right;">BROADCAST</i> </h4>'+
+            '<p style="color:#cccccc;">'+arg.content+'</p>'+
+        '</article>'
+        document.getElementById('chat_container').innerHTML += message
+        document.getElementById('chat_container').scrollTop = document.getElementById('chat_container').scrollHeight;
+    });
+
+    socket.on("chat/newmessage", (arg) => {
+        fetch("https://angeldc943.repl.co/assets/templates/comment.html").then(data => {
+            return data.text()
+        }).then(html => {
+            let name = arg.user.split('<;userseparator;>')
+            let message = html.replace(/<content>/g,arg.message).replace(/<userdisplay>/g,name[0]).replace(/<user>/g,name[1])
+            message = message.replace(/<userid>/g,arg.userid).replace(/<accprofile>/g,arg.accprofile)
+            document.getElementById('chat_container').innerHTML += message
+            document.getElementById('chat_container').scrollTop = document.getElementById('chat_container').scrollHeight;
+        })
+    })
+
+    socket.on("chat/joinmessage", (arg) => {
+        let message = '<article class="touch" style="padding:10px;">'+
+            '<h4>'+arg.user+' <i style="float:right;">'+arg.message+' the chat</i> </h4>'
+        '</article>'
+        document.getElementById('chat_container').innerHTML += message
+        document.getElementById('chat_container').scrollTop = document.getElementById('chat_container').scrollHeight;
+        online_update();
+    });
+
+    function broadcast_message() {
+        socket.emit('chat/sendmessage',document.getElementById("message").value)
+        document.getElementById("message").value = ""
+    }
+
+    socket.emit('chat/connected')
+</script>

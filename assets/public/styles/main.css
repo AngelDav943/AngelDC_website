@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    transition: 0.1s;
+    font-family: Arial;
+    list-style-type: none;
+	text-overflow: ellipsis;
+}
+
+body {
+    background: #272727;
+    height:100%;
+}
+
+.touch:hover {
+    border-color:#ff7800;
+}
+
+#notif-alerts {
+    zoom: 125%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+#notif-alerts div{
+    padding: 10px 20px;
+    background-color: #3d3d41;
+    margin: 5px;
+    border-radius: 10px;
+    color:white;
+}
+
+.main {
+    zoom: 150%;
+    width: 600px;
+    height:calc(100% - 50px);
+    margin: 0px auto;
+    max-width: 95%;
+    float: center;
+    border-radius: 5px;
+    color: white;
+}
+
+.main *{
+    word-wrap: break-word;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    float: center;
+    background: #222222;
+    color: white;
+    text-align: center;
+}
+
+
+header {
+    zoom: 130%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+    width:100%;
+    position: fixed;
+    top: 0;
+    color: white;
+}
+
+floatbar {
+    /*font-size: 0.9vw;*/
+    overflow: auto;
+    position: fixed;
+    top: calc(5% + 45px);;
+    width: 17%;
+    height: calc(90% - 50px);
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+floatbar.right {
+    list-style-type: none;
+    margin: 0;
+    right: 20px;
+    padding: 0px;
+    text-align: right;
+}
+
+floatbar.left {
+    list-style-type: none;
+    margin: 0;
+    padding: 0px;
+    left: 20px;
+    direction: rtl;
+    text-align: left;
+}
+
+floatbar * {
+    padding: 0px 10px;
+}
+
+img#profile_background {
+    object-fit:cover;
+    height:110%;
+    position:fixed;
+    z-index:-100;
+    /*filter:blur(7px);*/
+    top:-5%;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.199);    /* color of the scroll thumb */
+  border-radius: 1vw;       /* roundness of the scroll thumb */
+}
+
+article {
+    padding: 20px;
+    background:#d8dae3;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color: black;
+    overflow: auto;
+    border-color: #4e4e52;
+    border-style: solid;
+}
+article.notif {
+    position: fixed;
+    z-index:-2;
+    top: calc(50% - 20%);
+    left: calc(50% - 20%);
+    width: 35%;
+    height: 30%;
+}
+
+article.alert {
+    padding:5px;
+    overflow: hidden;
+    border-radius: 50px;
+    background-image:linear-gradient(red,#ae0000);
+}
+article.tip {
+    padding:5px;
+    overflow: hidden;
+    border-radius: 50px;
+    background-image:linear-gradient(lime,green);
+}
+
+article article {
+    border-right-style: none;
+    border-left-style: none;
+    border-radius: 0px;
+}
+
+.bar {
+    z-index: -1;
+    position: absolute;
+    overflow: hidden;
+    width: 0%;
+    background: #272727/*#3d3d41*/;
+}
+
+header img {
+    height: 35px;
+}
+
+img {
+    margin: 5px;
+    padding: 0;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+.dark-mode article{
+    background-color: #3d3d41;
+    color: white;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgb(61 61 61);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    border: 1px solid rgb(61 61 61);
+}
+
+@viewport {
+    zoom: 1.0;
+    width: extend-to-zoom;
+}
+
+@-ms-viewport {
+    width: extend-to-zoom;
+    zoom: 125%;
+}
+
+@media screen and (max-width: 1200px) {
+    floatbar {
+        position:inherit;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+#header ul {
+    display: flex;
+    float:right;
+}
+
+@media screen and (max-width: 690px) {
+
+    header {
+        zoom: 150%;
+    }
+
+    img#profile_background {
+        filter: none;
+    }
+
+    header ul a {
+        display: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .hamb#header {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .hamb#header ul {
+        display: flow-root;
+        float: none;
+    }
+
+    .hamb#header ul a {
+        width: 100%;
+        display: block;
+    }
+
+    .hamb#header .bar {
+        z-index: -1;
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        background: #272727/*#3d3d41*/;
+    }
+}

@@ -1,0 +1,47 @@
+<center>
+
+    <style>
+        .main {
+            width:25%;
+        }
+
+        input {
+            border: none;
+            border-radius: 5px;
+            background: #ffffff;
+            color: #000;
+            text-decoration:none;
+            padding: 5px;
+            width:90%;
+        }
+
+        @media screen and (max-width: 1050px) {
+            .main {
+                width:50%;
+            }
+        }
+
+        @media screen and (max-width: 550px) {
+            .main {
+                width:75%;
+            }
+        }
+    </style>
+    <br>
+    <br>
+    <br>
+    <article>
+        <script src="__rooturl/assets/scripts/hasher.js"></script>
+        <p>Username</p>
+        <input type="text" id="Username">
+        <br>
+        <br>
+        <p>Password</p>
+        <input type="password" id="Password">
+        <br>
+        <br>
+        <input type="button" value="Login" onclick="window.location = ('__rooturl/login?n=' + document.getElementById('Username').value + '&p=' + document.getElementById('Password').value.hashCode());">
+    </article>
+
+    <a href="__rooturl/signin">Dont have an account? sign in!</a>
+</center>

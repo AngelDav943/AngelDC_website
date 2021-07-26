@@ -1,0 +1,50 @@
+[
+    {
+        "name":"admin",
+        "description":"he admin.",
+        "image":"__rooturl/favicon.ico",
+        "id":0
+    },
+    {
+        "name":"Beta tester",
+        "description":"One of the first's persons to create an account!",
+        "image":"__rooturl/assets/images/badges/betatester.png",
+        "id":1
+    },
+    {
+        "name":"Flashlighter",
+        "description":"He haves the flashlight.",
+        "image":"__rooturl/assets/images/badges/flashlight.png",
+        "id":2
+    },
+    {
+        "name":"Uranium'd",
+        "description":"Get uranium'd.",
+        "image":"__rooturl/assets/images/badges/uranium.png",
+        "id":3
+    },
+    {
+        "name":"Cone",
+        "description":"Cone.",
+        "image":"__rooturl/assets/images/badges/cone.png",
+        "id":4
+    },
+    {
+        "name":"",
+        "description":"",
+        "image":"",
+        "id":5
+    },
+    {
+        "name":"Code destroyer",
+        "description":"This person is always breaking something, atleast that helps to make the site better...",
+        "image":"__rooturl/assets/images/badges/code_destroyer.png",
+        "id":6
+    },
+    {
+        "name":"Forum maniac",
+        "description":"You spend a lot of time making posts and commenting in the forum, like a forum maniac.",
+        "image":"__rooturl/assets/images/badges/forum_maniac.png",
+        "id":7
+    }
+]

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta property="og:title" content="AngelDav Test Website: __pagetitle"/>
+        <meta name="description" content"__pagedescription">
+        <meta property="og:image" content="__rooturl/<imageembed>">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AngelDav test website</title>
+        <link rel="stylesheet" href="__rooturl/assets/styles/input.css">
+        <link rel="stylesheet" href="__rooturl/assets/styles/main.css">
+
+        <script src="__rooturl/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io();
+            socket.on("connected", (token) => {
+                document.cookie = 'token='+token+';'
+            })
+
+            socket.on("connection_status", (arg) => {
+                let message = '<div style="background-color:'+arg.color+'">'+
+                    '<h4>'+arg.title+'</h4>'+
+                    arg.content+
+                '</div>'
+                document.getElementById('notif-alerts').innerHTML += message
+                setTimeout(() => {
+                    console.log("notif deleted")
+                    document.getElementById('notif-alerts').innerHTML = document.getElementById('notif-alerts').innerHTML.replace(message,"")
+                },5000)
+            });
+        </script>
+
+        <style>
+            .left {
+                float:left;
+                background-color:#00000036;
+                width:calc(70% - 10px);
+                padding:0;
+            }
+
+            .right {
+                float:right;
+                padding:10px;
+                width:calc(30% - 20px);
+                text-align:right;
+            }
+
+            li a.invisible:hover article {
+                border-color:#ff7800;
+            }
+
+            
+            @media screen and (max-width: 720px) {
+                
+                .right {
+                    width:calc(100% - 20px);
+                    float: none;
+                }
+
+                .left {
+                    width:100%;
+                    float: none;
+                }
+
+                .topic-container a.button.simple{
+                    width:100%;
+                }
+
+            }
+        </style>
+
+    </head>
+
+    <!--<article class="notif">
+        <p>test</p>
+    </article>-->
+
+    <body>
+        <¡defaultheader>
+
+        <div id="notif-alerts">
+            
+        </div>
+
+        <section class="<¡templatesectionclass>" id="main">
+            <br> <br> <br>
+            <article style="padding:0px; min-height:250px;">
+                <li class="right" style="">
+                    <¡user_displayname>
+                    <br>
+                    @<¡user_username>
+                    <br>
+                    <¡sidebarsection>
+                </li>
+                <li class="left" style="min-height:250px;">
+                    <¡templatesectionmain>
+                </li>
+            </article>
+        </section>
+
+        <br>
+
+    </body>
+
+</html>

@@ -1,0 +1,51 @@
+<center>
+    <article class="alert">
+        <p style="float:right;">(STATIC MESSAGE) You need a Access key to create an account</p>
+    </article>
+
+    <style>
+        .main {
+            width:25%;
+        }
+
+        input {
+            border: none;
+            border-radius: 5px;
+            background: #ffffff;
+            color: #000;
+            text-decoration:none;
+            padding: 5px;
+            width:90%;
+        }
+
+        @media screen and (max-width: 1050px) {
+            .main {
+                width:50%;
+            }
+        }
+
+        @media screen and (max-width: 550px) {
+            .main {
+                width:75%;
+            }
+        }
+    </style>
+
+    <article>
+        <form action="/newaccount" method="POST" enctype="multipart/form-data">
+            <p>Username</p>
+            <input type="username" placeholder="Username" name="user">
+            <br>
+            <p>Password</p>
+            <input type="pass" placeholder="Password" name="pass">
+            <br>
+            <p>Access-key</p>
+            <input type="invitekey" placeholder="Invite key" name="inv">
+            <br>
+            <button>Create account</button>
+        </form>
+    </article>
+
+    <a href="__rooturl/login">Already have an account? Log in!</a>
+</center>
+
