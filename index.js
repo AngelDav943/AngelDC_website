@@ -4,7 +4,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const cors = require('cors');
-let fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 const page = require(`${__dirname}/server-modules/pageloader.js`);
 const accounts = require(`${__dirname}/server-modules/accounts.js`);
