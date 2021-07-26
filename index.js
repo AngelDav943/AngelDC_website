@@ -47,7 +47,7 @@ app.get('*', (req, res) => {
 
 
 io.on('connection', socket => {
-    eval(fs.readFileSync(`${__dirname}/events/io:connection.js`).toString())
+    eval(fs.readFileSync(`${__dirname}/events/ioconnection.js`).toString())
 });
 
 //Whenever someone connects this gets executed
