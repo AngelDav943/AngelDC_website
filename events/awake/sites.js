@@ -13,6 +13,6 @@ app.post(`/newaccount`, async (req, res) => {
 });
 
 app.get(`/users/:user`, (req, res) => {
-    eval(fs.readFileSync(`${__dirname}/events/awake/users:appget/users:user.js`).toString())
+    eval(fs.readFileSync(`${__dirname}/events/awake/usersappget/user.js`).toString())
 })
 
