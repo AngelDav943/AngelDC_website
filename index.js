@@ -20,6 +20,8 @@ app.use(fileUpload({
     },
 }));
 
+// a
+
 app.use(cors())
 app.use('/assets', express.static('assets/public'));
 app.use('/favicon.ico', express.static('assets/favicon.ico'));
