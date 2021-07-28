@@ -42,4 +42,4 @@ setTimeout(() => {
         "title":title,
         "templatedir":filepath
     }).load()
-},499)
+},)
