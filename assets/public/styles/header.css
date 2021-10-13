@@ -1,0 +1,97 @@
+header {
+	z-index: 1;
+	zoom:100%;
+ 	background-repeat:repeat;
+	color: #bcbcbc;
+	font-weight: 600;
+	height:104px;
+	overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	background-size: 180px;
+    align-items: center;
+	padding: 0px 25px;
+    width:calc(100% - 50px);
+	background-image: url("https://static.angeldc943.repl.co/loop.png");
+}
+
+header nav {
+	display: flex;
+}
+
+header a.btn {
+	zoom:125%;
+	text-decoration: none;
+	padding: 10px;
+	color: #bcbcbc;
+}
+
+header a.btn:hover {
+	color: #ffffff;
+}
+
+a.invisible {
+	color: #ffffff;
+}
+
+header account {
+	margin: 20px;
+	height: calc(100% - 40px);
+}
+
+pup.hidden {
+	display:none;
+}
+
+pup {
+	display: flex;
+	flex-direction: column;
+	position:fixed;
+	background-color:#3b3b3fc4;
+	right:0px;
+	top:104px;
+	width: 155px;
+	height:230px;
+	padding:10px;
+}
+
+pup a.btn {
+	padding: 3px 0px;
+}
+
+account {
+	cursor: pointer;
+}
+
+account .account {
+	display: flex;
+}
+
+@media screen and (max-width: 690px) {
+
+    header {
+		background-size: 250px;
+    }
+
+    header nav {
+        width: 0%;
+        display: none;
+    }
+
+    .hamb#header {
+		position: fixed;
+		align-items: flex-start;
+        height: 100%;
+        width: 100%;
+    }
+
+    .hamb#header nav {
+        display: flex;
+		flex-direction: column;
+        width:100%;
+    }
+
+	.hamb#header nav * {
+        zoom:175%;
+    }
+}

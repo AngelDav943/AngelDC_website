@@ -1,0 +1,41 @@
+<style>
+    .topic-container {
+        width: 30%;
+        float: right;
+        margin: 10px 0px;
+    }
+
+    .post-container {
+        width: 70%;
+        float: left;
+    }
+
+    @media screen and (max-width: 720px) {
+        .post-container {
+            width:100%;
+            float: none;
+        }
+
+        .topic-container {
+            width:100%;
+            float: none;
+        }
+    }
+</style>
+
+<article>
+	<script>
+		function submitbutton() {
+            var title = document.getElementById("title").value;
+            var content = document.getElementById("content").value;
+            content = content.replace(new RegExp(String.fromCharCode(10),'g'), '<slash-n>')
+            window.location = ("__rooturl/blog/new?t="+title+"&c="+content);
+        }
+	</script>
+    <p>Publishing post as <i style="color:gray;">@<¡user_username></i></p>
+    <br>
+    <input style="width:95%;" type="text" id="title" placeholder="Title">
+    <br>
+    <textarea style="width:95%;" rows="5" placeholder="Content" id="content"></textarea>
+    <input type="button" id="submit" value="submit" onclick=' submitbutton();'>
+</article>

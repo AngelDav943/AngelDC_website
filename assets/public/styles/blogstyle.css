@@ -1,0 +1,16 @@
+section.main {
+	zoom: 120%;
+	overflow: hidden;
+    width: 765px;
+    height:auto;
+    margin: 69px auto;
+    max-width: calc(100% - 50px);
+    color:white;
+	background: linear-gradient(0deg, #181818ed, #282828);
+}
+
+@media screen and (max-width: 800px) {
+	section.main {
+		display: block;
+	}
+}

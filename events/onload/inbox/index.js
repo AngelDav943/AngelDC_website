@@ -6,7 +6,9 @@ function getData(notifs,timestamp) {
 					let returndata = data
 					returndata[1] = notf
 					resolve(returndata)
-				}))
+				})).catch(err => {
+					console.log("FART: " + err)
+				})
 			}
 		})
 	})

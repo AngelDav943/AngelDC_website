@@ -21,7 +21,32 @@
         }
     </script>
 </article>
-<article class="touch">
-    <p>People online</p>
-    <¡peopleonline>
+<article class="touch" >
+    <p><b>People online</b></p>
+	<div id="online_users">
+
+	</div>
 </article>
+
+<script>
+    var frame = document.getElementById("online_users")
+    var url = 'https://angeldc943.repl.co/api/users/online?repeat=false&value=name'
+    function online_update() {
+        setTimeout(() => {
+            fetch(url).then(res => {
+                res.json().then(usersarray => {
+                    frame.innerHTML = ''
+                    usersarray.forEach(user => {
+						console.log(user)
+                        frame.innerHTML += user+'<br>'
+                    });
+                });
+            });
+        }, 750);
+        
+        setTimeout(() => {
+            online_update();
+        }, 10000);
+    }
+    online_update();
+</script>

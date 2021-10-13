@@ -37,7 +37,7 @@ function simplifiedpost(post, other, topic) {
 }
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
-    if (/*user && user.perms.admin*/true == true) {
+    if (true == true) {
         post.getAllTopics().then((topics) => {
 
             new Promise((resolve, reject) => {

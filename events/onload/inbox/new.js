@@ -1,4 +1,15 @@
-accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
+res.send(
+	`<body style="margin:0; display:flex; justify-content:center; height:100%; align-items:center; background-color:#2f2f2f; color:white; flex-direction: column;">`+		
+		`<div>`+
+			`<img style="height:100px; width:auto;" src="https://angeldc943.repl.co/assets/images/icons/inbox.png">`+
+			`<img style="height:100px; width:auto;" src="https://static.angeldc943.repl.co/assets/images/oldmonitor.png">`+
+		`</div>`+
+		`<p style="margin:0px;">inbox messaging disabled</p>`+
+		`<p style="margin:0px; zoom:250%;">sorry!</p>`+
+	`</body>`
+)
+
+/*accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
     if (user && user.banned == false) {
 		console.log(req.query)
         if (req.query != {} && req.query.t != undefined) {
@@ -32,4 +43,4 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 			}).load()
         }
     }
-})
+})*/

@@ -20,8 +20,6 @@ app.use(fileUpload({
     },
 }));
 
-// a
-
 app.use(cors())
 app.use('/assets', express.static('assets/public'));
 app.use('/favicon.ico', express.static('assets/favicon.ico'));
@@ -39,20 +37,31 @@ for (var i = 0; i < awake.length; i++) {
     }
 }
 
-app.get('/re', (req,res) => {
-	res.sendFile(`${__dirname}/assets/server/basetemplates/default.html`)
-})
-
+var closed = false
 app.get('*', (req, res) => {
-    eval(fs.readFileSync(`${__dirname}/events/loadpage.js`).toString() )
+	var cooki = cookies.getCookie(req.headers.cookie, "access_perm") == process.env['access_perm']
+	if ( closed == true && cooki === false && req.path.includes("/api") == false) {
+		new page.loader({
+			"res":res,
+			"req":req,
+			"custombasetemplate":fs.readFileSync(`${__dirname}/pages/ohuh.html`).toString(),
+			"template":"oh uh!"
+		}).load()
+	} else if (cooki === true || req.path.includes("/api") == true || closed == false) {
+    	eval(fs.readFileSync(`${__dirname}/events/loadpage.js`).toString() )
+	}
+
 });
 
+app.get('/api', (req, res) => {
+	eval(fs.readFileSync(`${__dirname}/events/loadpage.js`).toString() )
+})
 
+//Whenever someone connects this gets executed
 io.on('connection', socket => {
     eval(fs.readFileSync(`${__dirname}/events/ioconnection.js`).toString())
 });
 
-//Whenever someone connects this gets executed
 
 http.listen(3000, () => {
   console.log('server started');

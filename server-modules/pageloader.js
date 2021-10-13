@@ -33,7 +33,7 @@ class loader {
                     "500templateerrorcode:" + '404',
                     "500templateerrortitle:" + (this.req.path.substring(1) + " isn't a valid page")
                 ]
-                console.log(this.templaterdir)
+                console.log("this.templatedir = "+this.templaterdir)
             }
 
             if (fs.existsSync(this.templatedir)) dirtemplate = this.templatedir
@@ -47,7 +47,7 @@ class loader {
                 let section = null;
                 if (fs.existsSync(dirtemplate) && !section) section = fs.readFileSync(dirtemplate).toString()
                 if (this.template && !section && !fs.existsSync(dirtemplate)) section = this.template
-                if (account && account.banned == true) section = fs.readFileSync(`${__dirname}/../pages/banned.html`)
+                if (account && account.banned == true) section = fs.readFileSync(`${__dirname}/../view/banned.html`)
 
                 htmltemplate = htmltemplate.replace(/<¡templatesectionmain>/g, section);
                 htmltemplate = htmltemplate.replace(/<¡defaultheader>/g, fs.readFileSync(`${__dirname}/../assets/server/templates/navigationbar.html`).toString());
@@ -82,11 +82,10 @@ class loader {
                     
 
                     let backgroundpage = ''
-                    let background = `__rooturl/assets/images/userbackgrounds/${account.id+1}.png`
+                    let background = `background: url(__rooturl/assets/images/userbackgrounds/${account.id+1}.png);`
                     let background_exists = fs.existsSync(`${__dirname}/../assets/public/images/userbackgrounds/${account.id+1}.png`)
                     if (!background_exists) background = ``
-                    if (background != ``) backgroundpage = fs.readFileSync(`${__dirname}/../assets/server/templates/profilebackground.html`).toString().replace(/__profilebackground/g,background)
-                    htmltemplate = htmltemplate.replace(/<¡userbackground>/g,backgroundpage)
+                    htmltemplate = htmltemplate.replace(/<¡userbackground>/g,background)
 					
 
                 } else {

@@ -1,4 +1,4 @@
-let args = url
+/*let args = url
 args.shift()
 
 function urlify(text) {

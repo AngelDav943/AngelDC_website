@@ -1,9 +1,3 @@
-/*io.emit("connection_status",{
-    "title":"{Server}",
-    "content": "test",
-    "color":"#2196f3"
-});*/
-
 accounts.getAllUsers().then(accounts => {
     let accnames = "<article class='grid-container'> "
     var htmlpage = fs.readFileSync(`${__dirname}/pages/users/index.html`).toString(); 
@@ -22,7 +16,7 @@ accounts.getAllUsers().then(accounts => {
 			if (!profile_exists) profile = `__rooturl/assets/images/userprofiles/UserDefault.png`
 
 			let isbot = ""
-			if (user.perms.bot == true) isbot = `<b style="font-size:50%;color: #ffffff;background-color: #ff7c00;padding: 4px;margin: 0px 10px;border-radius: 1000px;">BOT</b>`
+			if (user.perms.bot == true) isbot = `<b style="font-size:50%;color: #ffffff;background-color: #ff7c00;padding: 4px; border-radius: 1000px;">BOT</b>`
 
 			let usertemplate = new page.templater({
 				"template": acctemplate,
@@ -39,7 +33,7 @@ accounts.getAllUsers().then(accounts => {
 		}
     })
     accnames = `${accnames} </article>`
-
+	
     new page.loader({
         "res":res,
         "req":req,

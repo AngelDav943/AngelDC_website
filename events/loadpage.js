@@ -24,15 +24,11 @@ if (fs.existsSync(scriptpath)) {
         eval(fs.readFileSync(scriptpath).toString())
         scriptloaded = true
     } catch(err) {
-        try {
-            if (urlpath.toLowerCase() != "/" && url[0].toLowerCase() != "assets") {
-                eval(fs.readFileSync(`${__dirname}/events/onload/${url[0].toLowerCase()}/notfound.js`).toString())
-                scriptloaded = true
-            }
-        } catch(err) {
-
+        if (fs.existsSync(`${__dirname}/events/onload/${url[0].toLowerCase()}/notfound.js`) && urlpath.toLowerCase() != "/" && url[0].toLowerCase() != "assets") {
+            eval(fs.readFileSync(`${__dirname}/events/onload/${url[0].toLowerCase()}/notfound.js`).toString())
+            scriptloaded = true
         }
-    }
+	}
 }
 
 setTimeout(() => {

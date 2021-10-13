@@ -1,47 +1,14 @@
-<a style="height:15px;" onclick="document.getElementById('acc_config').classList.toggle('hideconfig')">
-    <img style="height:40px; width:40px; object-fit:cover; border-radius: 100%; margin:5px;" src="<¡profile>">
-    <div id="acc_config" class="hideconfig" style="">
-        <p style="color:white;"><¡userdisplay></p>
-        <p style="font-size:70%; color:grey;">@<¡username></p>
-        <br>
-        <a style="width:100%;" class="button simple" id="mobile_return" onclick="document.getElementById('acc_config').classList.toggle('hideconfig')" >Close</a>
-        <a style="display:block; width:100%;" class="button simple" href="__rooturl/users/<¡userid>" >Profile</a>
-        <a style="display:block; width:100%;" class="button simple" onclick="document.cookie = 'uid=0;path=/'; window.location.reload()">Log out</a>
-    </div>
-</a>
-
-<style>
-    .hideconfig {
-        display: none;
-    }
-
-    #acc_config {
-        text-align:right;
-        position:fixed;
-        float:right;
-        z-index:1;
-        border-radius:5px;
-        background-color:#434343; 
-        right:0;
-        top:50px;
-        width:70px;
-        padding:5px;
-    }
-
-    #mobile_return {
-        display:none;
-    }
-
-    @media screen and (max-width: 690px) {
-        #acc_config {
-            top:5px;
-            left:5px;
-            width:calc(100% - 20px);
-            height:calc(100% - 20px);
-        }
-
-        #mobile_return {
-            display:block;
-        }
-    }
-</style>
+<account style="text-align:right;" onclick="document.getElementById('popup').classList.toggle('hidden')">
+	<div class="account">
+		<div style="padding:5px 10px;">
+			<p><¡userdisplay></p>
+			<p>@<¡username></p>
+		</div>
+		<img src="<¡profile>" alt="profile picture" style="width:50px; height:50px;">
+	</div>
+</account>
+<pup id="popup" class="hidden">
+	<a class="btn" href="__rooturl/users/<¡userid>">Profile</a>
+	<a class="btn" href="__rooturl/inbox">Inbox</a>
+	<a class="btn" onclick="document.cookie = 'uid=0;path=/'; window.location.reload()">Log out</a>
+</pup>

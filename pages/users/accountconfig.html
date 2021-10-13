@@ -1,31 +1,33 @@
+<div class="user_config">
 
-<h4>User config</h4>
-<a class="button simple" onclick='changedesc()'>Change description</a>
-<a class="button simple" onclick='changedisplay()'>Change display name</a>
-<a class="button simple" href="__rooturl/setavatar">Change profile picture</a>
-<a class="button simple" href="__rooturl/setbackground">Change profile background</a>
+	<script>
+		let ogtext = document.getElementById('DESCRIPTION').innerHTML
+		let ogname = document.getElementById('displayname').innerHTML
 
-<script>
-    let ogtext = document.getElementById('DESCRIPTION').innerHTML
-    let ogname = document.getElementById('displayname').innerHTML
+		let clkd_desc = false
+		function changedesc() {
+			clkd_desc = !clkd_desc
+			if (clkd_desc) {
+				document.getElementById('DESCRIPTION').innerHTML = `<textarea style="width:100%;" class="changedesc" rows='10' id='insertdescription'>`+document.getElementById('DESCRIPTION').innerHTML.replaceAll(/<br>/g,"\n").replaceAll(/\t/g,"")+`</textarea><input type='button' value='Submit' onclick="window.location = ('__rooturl/api/users/changeuserdata?name=description&value='+document.getElementById('insertdescription').value.replace(new RegExp(String.fromCharCode(10),'g'), '<LINEBREAK>'));">`
+			} else {
+				document.getElementById('DESCRIPTION').innerHTML = ogtext
+			}
+		}
 
-    let clkd_desc = false
-    function changedesc() {
-        clkd_desc = !clkd_desc
-        if (clkd_desc) {
-            document.getElementById('DESCRIPTION').innerHTML = `<textarea style="width:100%;" class="changedesc" rows='10' id='insertdescription'>`+document.getElementById('DESCRIPTION').innerHTML.replaceAll(/<br>/g,"\n").substring(8)+`</textarea><input type='button' value='Submit' onclick="window.location = ('__rooturl/api/users/changeuserdata?name=description&value='+document.getElementById('insertdescription').value.replace(new RegExp(String.fromCharCode(10),'g'), '<LINEBREAK>'));">`
-        } else {
-            document.getElementById('DESCRIPTION').innerHTML = ogtext
-        }
-    }
+		let clkd_disp = false
+		function changedisplay() {
+			clkd_disp = !clkd_disp
+			if (clkd_disp) {
+				document.getElementById('displayname').innerHTML = `<input type="text" style="border-radius: 500vw;" value="${document.getElementById('displayname').innerHTML}" id="insertname"><input type='button' style="border-radius: 500vw;" value='Change' onclick="window.location = ('__rooturl/api/users/changeuserdata?name=displayname&value='+document.getElementById('insertname').value);">`
+			} else {
+				document.getElementById('displayname').innerHTML = ogname
+			}
+		}
+	</script>
+	<h4>User config</h4>
+	<a class="button simple" onclick='changedesc()'>Change description</a>
+	<a class="button simple" onclick='changedisplay()'>Change display name</a>
+	<a class="button simple" href="__rooturl/setavatar">Change profile picture</a>
+	<a class="button simple" href="__rooturl/setbackground">Change profile background</a>
 
-    let clkd_disp = false
-    function changedisplay() {
-        clkd_disp = !clkd_disp
-        if (clkd_disp) {
-            document.getElementById('displayname').innerHTML = `<input type="text" style="border-radius: 500vw;" value="${document.getElementById('displayname').innerHTML}" id="insertname"><input type='button' style="border-radius: 500vw;" value='Change' onclick="window.location = ('__rooturl/api/users/changeuserdata?name=displayname&value='+document.getElementById('insertname').value);">`
-        } else {
-            document.getElementById('displayname').innerHTML = ogname
-        }
-    }
-</script>
+</div>

@@ -1,0 +1,79 @@
+section.main {
+	height:calc(100% - 50px);
+}
+
+#badges {
+	height: calc(100% + 30px);
+	float: right;
+	display: flex;
+    flex-direction: column;
+	margin: -26px -25px;
+	padding: 10px;
+	background-color: #2b2b2f;
+}
+
+#badges img {
+	margin: 10px;
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+}
+
+.user {
+	width: 55%;
+	float: left;
+}
+
+.user * {
+	font-weight: 100;
+}
+
+.user#display {
+	display: flex;
+}
+
+.sub {
+	color:#dadada9e;
+}
+
+.profile img {
+	margin-right:18px;
+	width:140px;
+    max-width: 140px;
+	height:140px;
+    border-color: #ff6000;
+    border-style: solid;
+}
+
+.wall {
+	margin: 25px 0px;
+}
+
+@media screen and (max-width: 800px) {
+	#badges {
+		width: calc(100% + 50px);
+		height: 70px;
+		float: none;
+		margin:0 -32px;
+		padding:10px;
+		overflow-x: auto;
+		flex-direction: row;
+	}
+
+
+	#content {
+		float: none;
+	}
+
+	.user {
+		width:100%;
+	}
+
+	.user#display {
+		display: block;
+	}
+
+	.user#display .profile {
+		width: 100%;
+	}
+}

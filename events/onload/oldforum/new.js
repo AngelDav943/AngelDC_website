@@ -1,4 +1,4 @@
-let topics = ["general","random","off-topic","itteblox","roblox"]
+/*let topics = ["general","random","off-topic","itteblox","roblox"]
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
     if (user && user.banned == false) {
@@ -47,7 +47,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
                 var data_newother = JSON.stringify(otherjson);
 
                 try {
-					let message = encodeURIComponent(`${user.displayname} *@${user.name}*  made a post in ${topic} \n **Title: ** ${t}  \n **/forum/${topic}/${postindex+1}**`)
+					let message = encodeURIComponent(`${user.displayname} *@${user.name}*  made a post in ${topic} \n **Title: ** ${t}  \n **//*forum/${topic}/${postindex+1}**`)
                     fs.writeFile(`${__dirname}/assets/public/posts/${topic}/posts.json`, data_newpost, err => {
                         if (err) console.log(err)
                         
@@ -76,4 +76,4 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
             }).load()
         }
     }
-})
+})*/

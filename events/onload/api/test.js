@@ -1,2 +1,0 @@
-res.send("")
-console.log()

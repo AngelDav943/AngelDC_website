@@ -4,7 +4,7 @@
 }
 
 a {
-    color: white;
+    color:#ceb0ff;
     cursor: pointer;
 }
 
@@ -34,10 +34,6 @@ a.imagebutton {
 
 a.imagebutton p {
     display: none;
-}
-
-header a {
-    background: rgba(0, 0, 0, 0.1);
 }
 
 a.invisible {
