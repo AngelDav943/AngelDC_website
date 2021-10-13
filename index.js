@@ -4,13 +4,6 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const cors = require('cors');
-const fetch = require('node-fetch');
-
-const page = require(`${__dirname}/server-modules/pageloader.js`);
-const accounts = require(`${__dirname}/server-modules/accounts.js`);
-const cookies = require(`${__dirname}/server-modules/cookies.js`);
-const post = require(`${__dirname}/server-modules/post.js`);
-const inbox = require(`${__dirname}/server-modules/inbox.js`);
 
 let fileUpload = require('express-fileupload');
 app.use(fileUpload({
@@ -26,35 +19,55 @@ app.use('/favicon.ico', express.static('assets/favicon.ico'));
 
 let users_online = {};
 let sockets_online = {};
-var awake = fs.readdirSync(`${__dirname}/events/awake`);
 
-for (var i = 0; i < awake.length; i++) {
-    try {
-	    eval( fs.readFileSync(`${__dirname}/events/awake/${awake[i]}`).toString() );
-    } catch(err) {
-        console.log("ERROR AT: " + awake[i])
-        console.error(err)
-    }
+eval( fs.readFileSync(`${__dirname}/account_post.js`).toString() );
+
+const page = require('angeldav-testpackage');
+page.url = "https://angeldc943.repl.co"
+page.default.template = `${__dirname}/assets/server/basetemplates/default.html`
+page.default.notfound = `${__dirname}/pages/404.html`
+page.default.other = {
+    "defaultheader": fs.readFileSync(`${__dirname}/assets/server/templates/navigationbar.html`)
 }
 
-var closed = false
-app.get('*', (req, res) => {
-	var cooki = cookies.getCookie(req.headers.cookie, "access_perm") == process.env['access_perm']
-	if ( closed == true && cooki === false && req.path.includes("/api") == false) {
-		new page.loader({
-			"res":res,
-			"req":req,
-			"custombasetemplate":fs.readFileSync(`${__dirname}/pages/ohuh.html`).toString(),
-			"template":"oh uh!"
-		}).load()
-	} else if (cooki === true || req.path.includes("/api") == true || closed == false) {
-    	eval(fs.readFileSync(`${__dirname}/events/loadpage.js`).toString() )
+page.default.codeDir = `${__dirname}/default_onload.js`
+
+app.get('/api/users/online', (req, res) => {
+	if (req.query.page) var requestedpage = req.query.page.split('/')[0];
+	let repeat = req.query.repeat || "false";
+	let value = req.query.value;
+	let id = req.query.id;
+	let onlinepeople = []
+
+	function pusharrayusers(online_user) {
+		if (users_online[online_user].visiting == `/${requestedpage}` || !requestedpage) {
+			onlinepeople.push(users_online[online_user])
+		}
 	}
 
-});
+	if (!id) for (let online_user in users_online) {
+		pusharrayusers(online_user)
+	}
+	if (id) for (let index in users_online) {
+		if (users_online[index].id == id) pusharrayusers(index)
+	}
 
-app.get('/api', (req, res) => {
-	eval(fs.readFileSync(`${__dirname}/events/loadpage.js`).toString() )
+	if (value) for (let index in onlinepeople) {
+		onlinepeople[index] = onlinepeople[index][value]
+	}
+
+	if (req.query.repeat == "false") onlinepeople = onlinepeople.filter((thing, index, self) =>
+		index === self.findIndex((t) => (
+			t.place === thing.place && t === thing
+		))
+	)
+
+	res.json(onlinepeople)
+})
+
+const pageloader = require(`angeldav-test-pageloader`)(page,{
+    "app":app,
+    "path":`${__dirname}/view`
 })
 
 //Whenever someone connects this gets executed

@@ -1,18 +1,10 @@
-<center id="Welcomeback" style="mix-blend-mode:difference; padding:50px 0px 10px;">
+<center id="Welcomeback" style="mix-blend-mode:difference; padding:50px 0px;">
     <h2 >Welcome back <a href="__rooturl/users/<¡user_id>">@<¡user_username>!</a></h2>
 </center>
 
-<div id="user">
-    <div id="user-article" style=" padding:20px 0px; display:flex; justify-content:center;">
-        <a class="button" href="__rooturl/users/<¡user_id>">Your profile page</a>
-        <a class="button" href="__rooturl/Forum/">Forum posts</a>
-        <a class="button" href="__rooturl/chat">Chat around!</a>
-    </div>
-</div>
-
 <script id="script">
     if ('<¡user_displayname>' == "") {
-        document.getElementById('user').innerHTML = ''
+        //document.getElementById('user').innerHTML = ''
         document.getElementById('Welcomeback').innerHTML = '<h2>Welcome Guest!</h3>'
     }
     document.getElementById('script').outerHTML = ''
@@ -58,17 +50,6 @@
 
 <div class="article-maincontainer" style="">
     <li class="left">
-        
-        <div id="latest_post">
-			<h3 style="padding:0px 20px;">Latest forum post</h3>
-			<article style="background-color:#303033;">
-				<li>
-					<h3><br></h3>
-					<p>The forum is no longer available</p>
-					<h3><br></h3>
-				</li>
-			</article>
-		</div>
         <article style="height:calc(100% - 40px)">
             <p>Welcome to this website, made by <a href="__rooturl/users/1">@Angel</a>.<p>
             <br>
@@ -76,22 +57,17 @@
             <p>I made this website to just put tests i made with javascript and some other things, maybe i will add more things soon.</p>
             <p>I know lua, javascript and some c#, and i know some 3D modelling.</p>
             <br>
-            <p></p>
-        </article>
+			<p>You can read about Andec Studios by clicking <a href="__rooturl/andec">here</a>.</p>
+			<p>Or maybe check the blog by clicking <a href="__rooturl/blog">here</a>.</p>
+		</article>
+
     </li>
     <li class="right">
-        <h3 style="padding:0px 20px;"><br></h3>
         <article>
             <h3>Latests updates</h3>
-            <p>UI updated</p>
-        </article>
-		
-		<article>
-            <h3>Other pages</h3>
-			<div style="margin:10px 0px;">
-        		<a class="button" style="display:block;" href="__rooturl/andec">Andec Studios</a>
-
-			</div>
+            <p>Blog now public</p>
+            <p>Configuration page</p>
+            <p>Legacy theme</p>
         </article>
 
         <article>
@@ -100,6 +76,9 @@
         </article>
     </li>
 </div>
+<article>
+
+</article>
 
 <script>
     function reload_users() {

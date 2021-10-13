@@ -1,0 +1,88 @@
+const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
+const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
+const users_online = []
+
+args = url
+args.shift()
+
+accounts.getUserByID(parseInt(args[0])-1).then(user => {
+    accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(currentuser => {
+        if (user) {
+            let acc_config = ""
+            let isonline = "offline"
+            let onlinecolor = "#f04f39"
+            let banstatus = ""
+            let commentcount = 0
+
+            for (let online_user in users_online) {
+                if (users_online[online_user].id == user.id) {
+                    isonline = "online"; 
+                    onlinecolor = "#39f06e";
+                }
+            }
+
+            if (user.banned == true) banstatus = "<article class='alert'><p style='right'>This person is currently banned</p></article>"
+            if (currentuser) {
+                console.log(currentuser.name +" is looking at "+ user.name +" profile.") 
+                if (user.id == currentuser.id) {
+                    acc_config = fs.readFileSync(`${__dirname}/../../pages/users/accountconfig.html`);
+                }
+            }
+            let badges = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/badges.json`));
+            let htmlbadge = ''
+            let htmlbadgeinfo = ''
+			
+            if (user.badges.length > 0) user.badges.forEach((badgeid) => {
+                badges.forEach(currentbadge => {
+                    if (currentbadge.id == badgeid) {
+                        htmlbadge = `${htmlbadge} <img src="${currentbadge.image}">`
+                        htmlbadgeinfo = `${htmlbadgeinfo} <li><img src="${currentbadge.image}" style="float:left; height:35px; width:35px; object-fit: cover;"><h4>${currentbadge.name}</h4>"${currentbadge.description}"</li><br>`
+                    }
+                })
+            })
+            let profile = `__rooturl/assets/images/userprofiles/${user.id+1}.png`
+            let profile_exists = fs.existsSync(`${__dirname}/../../assets/public/images/userprofiles/${user.id+1}.png`)
+            if (!profile_exists) profile = `__rooturl/assets/images/userprofiles/UserDefault.png`
+            
+            let background = `__rooturl/assets/images/userbackgrounds/${user.id+1}.png`
+            let background_exists = fs.existsSync(`${__dirname}/assets/public/images/userbackgrounds/${user.id+1}.png`)
+            if (!background_exists) background = ``
+            let backgroundpage = ''
+            if (background != ``) backgroundpage = 'background:url('+background+');'
+
+			let isbot = ""
+			if (user.perms.bot == true) isbot = `<b style="font-size:75%;color: #ffffff;background-color: #ff7c00;padding: 2px 4px; margin: 0px 5px;border-radius: 1000px;">bot</b>`
+
+            new page.loader({
+                "res":res,
+                "req":req,
+                "title":`@${user.name}`,
+            	"basetemplate":`${__dirname}/../../assets/server/basetemplates/blogstyle.html`,
+                "template":fs.readFileSync(`${__dirname}/../../pages/users/users.html`).toString(),
+                "other":{
+                    "displayname":  `${user.displayname}`,
+                    "username":  `${user.name}`,
+                    "userindex":  `${user.id+1}`,
+
+                    "onlinestatus":  isonline,
+                    "onlinecolor":  onlinecolor,
+                    
+                    "userdesc":  `${user.description || "nothingness..." }`,
+                    "userdescinput":  `${user.description.replace(/<br>/g, String.fromCharCode(10)) || "nothingness..." }`,
+                    
+                    "badges":  htmlbadge,
+                    "badgesinfo":  htmlbadgeinfo,
+                    
+                    "accountconfig":  acc_config,
+                    "commentcount":  commentcount,
+                    
+                    "accprofile":  profile,
+                    "banstatus":  banstatus,
+
+                    "userbackground":  backgroundpage,
+					"isbot":  isbot
+                }
+            }).load()
+        }
+    })
+})

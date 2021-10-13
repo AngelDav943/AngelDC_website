@@ -8,8 +8,9 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>AngelDav test website</title>
-        <link rel="stylesheet" href="__rooturl/assets/styles/input.css">
         <link rel="stylesheet" href="__rooturl/assets/styles/main.css">
+        <link rel="stylesheet" href="__rooturl/assets/styles/input.css">
+		<link rel="stylesheet" href="__rooturl/assets/styles/base.css">
 		<link rel="stylesheet" href="__rooturl/assets/styles/header.css">
 
         <script src="__rooturl/socket.io/socket.io.js"></script>
@@ -18,18 +19,6 @@
             socket.on("connected", (token) => {
                 document.cookie = 'token='+token+';'
             })
-
-            socket.on("connection_status", (arg) => {
-                let message = '<div style="background-color:'+arg.color+'">'+
-                    '<h4>'+arg.title+'</h4>'+
-                    arg.content+
-                '</div>'
-                document.getElementById('notif-alerts').innerHTML += message
-                setTimeout(() => {
-                    console.log("notif deleted")
-                    document.getElementById('notif-alerts').innerHTML = document.getElementById('notif-alerts').innerHTML.replace(message,"")
-                },5000)
-            });
         </script>
     </head>
 
@@ -47,7 +36,7 @@
 					<p>A lot of features of this website wont work without javascript.</p>
 				</article>
 			</noscript>
-            <¡templatesectionmain>
+            <¿templatesectionmain>
         </section>
 
         <br>

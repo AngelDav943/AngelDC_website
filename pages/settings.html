@@ -1,0 +1,50 @@
+<h1>Settings</h1>
+<br>
+<article id="User_config">
+	<h3>User configuration</h3>
+	<br>
+	<div>
+		<p>Display name: </p>
+		<input type="text" style="border-radius: 500vw;" value="<¡user_displayname>" id="insertname">
+		<input type='button' style="border-radius: 500vw;" value='Change' onclick="window.location = ('__rooturl/api/users/changeuserdata?name=displayname&value='+document.getElementById('insertname').value);">
+	</div>
+	<br>
+	<div>
+		<p>Description: </p>
+		<textarea style="width:100%;" class="changedesc" rows='10' id='insertdescription'>
+			<¡description>
+		</textarea>
+	</div>
+	<input type='button' value='Submit' onclick="window.location = ('__rooturl/api/users/changeuserdata?name=description&value='+document.getElementById('insertdescription').value.replace(new RegExp(String.fromCharCode(10),'g'), '<LINEBREAK>'));">
+	<br>
+	<br>
+	<form action="/setavatar" method="POST" enctype="multipart/form-data">
+		<p>Profile picture</p>
+    	<input type="file" name="file">
+    	<button>upload</button>
+    </form>
+	<br>
+	<form action="/setbackground" method="POST" enctype="multipart/form-data">
+		<p>Background picture</p>
+        <input type="file" name="file">
+        <button>upload</button>
+    </form>
+</article>
+
+<article id="themes">
+	<h3>Themes</h3>
+	<br>
+	<input type="button" value="Default" onclick='theme("")'>
+	<br>
+	<input type="button" value="Legacy" onclick='theme("legacy")'>
+</article>
+
+<script src="__rooturl/assets/scripts/coookie.js"></script>
+<script>
+function theme(colorname) {
+	let modecookie = getCookie(document.cookie,"theme")
+	document.cookie = `theme=${colorname};`;
+	window.location = document.URL
+}
+document.getElementById("insertdescription").innerHTML = document.getElementById("insertdescription").innerHTML.replaceAll(/\t/g,"")
+</script>

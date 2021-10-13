@@ -49,6 +49,28 @@ section.main {
 	margin: 25px 0px;
 }
 
+/* Legacy theme css */
+
+html.legacy section.main {
+	padding: 25px;
+    height:100%;
+	color:black;
+	background:#FFF;
+	border-radius: 5px;
+}
+
+html.legacy #badges {
+	background-color: #e8e8e8;
+	margin: -43px -25px;
+	border-radius: 5px;
+}
+
+html.legacy .sub {
+	color:#00000091;
+}
+
+/* End Legacy theme css */
+
 @media screen and (max-width: 800px) {
 	#badges {
 		width: calc(100% + 50px);
