@@ -1,15 +1,10 @@
-section.main {
-	height:calc(100% - 50px);
-}
-
 #badges {
-	height: calc(100% + 30px);
 	float: right;
 	display: flex;
     flex-direction: column;
 	margin: -26px -25px;
 	padding: 10px;
-	background-color: #2b2b2f;
+	background: linear-gradient(0deg, #00000f00 0%, #2b2b2f 25%, #2b2b2f 100%);
 }
 
 #badges img {
@@ -20,7 +15,7 @@ section.main {
 }
 
 .user {
-	width: 55%;
+	width: 90%;
 	float: left;
 }
 
@@ -52,15 +47,16 @@ section.main {
 /* Legacy theme css */
 
 html.legacy section.main {
+	overflow: hidden;
+    height:auto;
 	padding: 25px;
-    height:100%;
 	color:black;
 	background:#FFF;
 	border-radius: 5px;
 }
 
 html.legacy #badges {
-	background-color: #e8e8e8;
+	background: linear-gradient(0deg, #00000000 0%, #e8e8e8 25%, #e8e8e8 100%);
 	margin: -43px -25px;
 	border-radius: 5px;
 }
@@ -73,15 +69,14 @@ html.legacy .sub {
 
 @media screen and (max-width: 800px) {
 	#badges {
-		width: calc(100% + 50px);
+		margin: 0px -25px !important;
+		background: #2b2b2f;
+		width: calc(100% + 30px);
 		height: 70px;
-		float: none;
-		margin:0 -32px;
 		padding:10px;
 		overflow-x: auto;
 		flex-direction: row;
 	}
-
 
 	#content {
 		float: none;
@@ -97,5 +92,10 @@ html.legacy .sub {
 
 	.user#display .profile {
 		width: 100%;
+	}
+
+	/* Legacy theme css */
+	html.legacy #badges {
+		background: #e8e8e8;
 	}
 }

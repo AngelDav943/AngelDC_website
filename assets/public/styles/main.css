@@ -23,12 +23,12 @@ html,body {
 }
 
 .main {
-    zoom: 150%;
+    zoom: 125%;
     width: 600px;
     height:calc(100% - 50px);
-    margin: 0px auto;
+    margin: 110px auto;
     max-width: 95%;
-	padding:25px 25px;
+	padding: 0px 25px;
     float: center;
     border-radius: 5px;
     color: white;
@@ -48,15 +48,6 @@ header {
     position: fixed;
     top: 0;
     color: white;
-}
-
-*::-webkit-scrollbar {
-  width: 12px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.199);    /* color of the scroll thumb */
-  border-radius: 1vw;       /* roundness of the scroll thumb */
 }
 
 article {
@@ -88,19 +79,7 @@ img {
     color: white;
 }
 
-body::-webkit-scrollbar {
-    width: 12px;
-}
 
-body::-webkit-scrollbar-track {
-    background: rgb(61 61 61);
-}
-
-body::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
-    border: 1px solid rgb(61 61 61);
-}
 
 @viewport {
     zoom: 1.0;

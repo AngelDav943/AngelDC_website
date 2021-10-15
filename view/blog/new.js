@@ -3,6 +3,7 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
 var post_title = req.query.t;
 var post_content = req.query.c;
 
+
 console.log(post_title +" || "+ post_content )
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
@@ -10,16 +11,22 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 
 		if (post_title && post_content) {
 			var posts = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/posts.json`));
-			posts.push({
-				"user": user.id,
-				"title": post_title.replace(/>/,"").replace(/</,""),
-				"content": post_content.replace(/<slash-n>/g,"\n").replace(/>/,""),
-				"timestamp": Date.now()
-			})
+			var posttitle = post_title.replace(/>/,"").replace(/</,"")
+			var postcontent = post_content.replace(/<slash-n>/g,"\n").replace(/>/,"")
 
-			fs.writeFile(`${__dirname}/../../assets/public/posts.json`, JSON.stringify(posts), err => {
-				if (err) console.log(err)
-			})
+			if (posts[posts.length-1].title != posttitle && posts[posts.length-1].content != postcontent && posts[posts.length-1].timestamp - Date.now() < -10000) {
+
+				posts.push({
+					"user": user.id,
+					"title": posttitle,
+					"content": postcontent,
+					"timestamp": Date.now()
+				})
+
+				fs.writeFile(`${__dirname}/../../assets/public/posts.json`, JSON.stringify(posts), err => {
+					if (err) console.log(err)
+				})
+			}
 			res.redirect(`${page.url}/blog`)
 		} else {
 			new page.loader({
@@ -33,7 +40,10 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
         new page.loader({
             "res":res,
             "req":req,
-            "template":fs.readFileSync(`${__dirname}/../../pages/noaccess.html`).toString()
+            "template":fs.readFileSync(`${__dirname}/../../pages/noaccess.html`).toString(),
+			"other":{
+				"message":"cooldown"
+			}
         }).load()
     }
 })

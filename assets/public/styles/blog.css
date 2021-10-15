@@ -5,6 +5,10 @@ article.blog_post {
 	word-break: break-all;
 }
 
+article.blog_post img {
+	margin-right: 10px;
+}
+
 html.dark-mode article.blog_post {
 	background-color:#303033;
 	color:white;

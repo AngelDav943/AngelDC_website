@@ -51,6 +51,7 @@ new Promise(function(resolve, reject) {
 			accounthtml = create(account,profile)
 			
 			resolve()
+			other["user_profile"] = profile
 			other["user_username"] = account.name
 			other["user_displayname"] = account.displayname
 			other["user_id"] = account.id+1

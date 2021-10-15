@@ -1,11 +1,12 @@
 section.main {
 	zoom: 120%;
 	overflow: hidden;
-    width: 765px;
     height:auto;
-    margin: 69px auto;
+    width: 765px;
+    margin: 87px auto;
     max-width: calc(100% - 50px);
     color:white;
+	padding: 20px 25px;
 	background: linear-gradient(0deg, #181818ed, #282828);
 }
 

@@ -6,9 +6,17 @@
 		<link rel="stylesheet" href="__rooturl/assets/styles/input.css">
 		<link rel="stylesheet" href="__rooturl/assets/styles/legacy.css">
 		<link rel="stylesheet" href="__rooturl/assets/styles/base.css">
+
+		<script src="__rooturl/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io();
+            socket.on("connected", (token) => {
+                document.cookie = 'token='+token+';'
+            })
+        </script>
 	</head>
 
-	<body>
+	<body style="<¡userbackground> background-size:cover; background-attachment:fixed;">
 		<br>
 		<br>
 		<center><h1 style="color:white;"><b style="font-size:55%; color: gray;">(legacy theme) </b> AngelDav test website</h1></center>

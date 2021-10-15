@@ -90,5 +90,10 @@ header a:hover {
 	padding: 20px;
 	background:#FFF;
 	margin-bottom: 20px;
-	border-radius: 5px;
+	border-radius: 10px;
+}
+
+div article, article, article {
+    border-color: #c6c6cd;
+    border-style: solid;
 }
