@@ -1,5 +1,6 @@
-const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
-const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
+const accounts = require(`${__dirname}/../../server-modules/accounts.js`);
+const blogmanager = require(`${__dirname}/../../server-modules/blog.js`);
+const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 var post_title = req.query.t;
 var post_content = req.query.c;
 
@@ -16,16 +17,12 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 
 			if (postcontent != "" && posttitle != "") if (posts[posts.length-1].title != posttitle && posts[posts.length-1].content != postcontent && posts[posts.length-1].timestamp - Date.now() < -10000) {
 
-				posts.push({
-					"user": user.id,
-					"title": posttitle,
-					"content": postcontent,
-					"timestamp": Date.now()
-				})
-
-				fs.writeFile(`${__dirname}/../../assets/public/posts.json`, JSON.stringify(posts), err => {
-					if (err) console.log(err)
-				})
+				blogmanager.newPost(
+					cookies.getCookie(req.headers.cookie, "uid"),
+					posttitle,
+					postcontent
+				);
+				
 			}
 			res.redirect(`${page.url}/blog`)
 		} else {

@@ -7,6 +7,14 @@
         "version": 97,
         "index": 3956
       }
+    ],
+    "view/tests/blog.js": [
+      {
+        "id": "b27c4a62-f142-4c3f-b6ab-52ac72b6761e",
+        "line": 5,
+        "version": 117,
+        "index": 192
+      }
     ]
   }
 }
