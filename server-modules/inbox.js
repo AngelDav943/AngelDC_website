@@ -4,9 +4,10 @@ let fetch = require('node-fetch');
 let notif_dir = `${__dirname}/../assets/public/notifications/`
 
 module.exports = {
-    timeFromTimestamp(timestamp) {
+    timeFromTimestamp(timestamp, hidetime) {
 		var d = new Date(timestamp);
-		timeStampCon = d.getDate() + '/' + (d.getMonth()) + '/' + d.getFullYear() + " " + d.getHours() + ':' + d.getMinutes();
+		timeStampCon = d.getDate() + '/' + (d.getMonth()) + '/' + d.getFullYear();
+		if (hidetime != true) timeStampCon += " " + d.getHours() + ':' + d.getMinutes() 
 
 		return timeStampCon;
 	},
@@ -31,7 +32,7 @@ module.exports = {
 				var toUser_inbox = JSON.parse(fs.readFileSync(`${__dirname}/../assets/public/notifications/${toID+1}.json`));
 				fetch(`${page.url}/api/users/get?id=${toID}`).then(response => response.json().then(data => {
 					let timestam = Date.now();
-					console.log(data)
+					//console.log(data)
 					toUser_inbox.push({
 						"user": fromID,
 						"title": title,

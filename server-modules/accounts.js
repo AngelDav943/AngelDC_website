@@ -5,7 +5,9 @@ let page = require(`${__dirname}/pageloader.js`);
 let cookiemanager = require(`${__dirname}/cookies.js`);
 let hash = require("sha256");
 let saved_userdata = [];
-let change_data_cooldown = false;
+let change_data_cooldown;
+let data_changes = 0;
+let perm_data_changes = 0;
 
 firebase.initializeApp({
     credential: firebase.credential.cert({
@@ -36,7 +38,43 @@ String.prototype.hashCode = function(seed = 0) {
     return 4294967296*(2097151 & h2)+(h1>>>0);
 };
 
+function data_cooldown() {
+	var returnval = change_data_cooldown
+	
+	data_changes += 1;
+	console.log(perm_data_changes)
+	if (perm_data_changes > 100) {
+		return false
+	} else {
+		if (data_changes > 4) {
+			change_data_cooldown = true
+			if (data_changes > 15) {
+				setTimeout(() => {
+					change_data_cooldown = false
+				},300*100)
+				data_changes = 0
+			} else {
+				setTimeout(() => {
+					change_data_cooldown = false
+				},60*100)
+			}
+		} else {
+			change_data_cooldown = true
+			setTimeout(() => {
+				change_data_cooldown = false
+			},5*100)
+		}
+	}
+
+	//console.log(!returnval, !change_data_cooldown, data_changes)
+	return !returnval
+}
+
 module.exports = { // password needs to be already hashed
+	createuid(user) {
+		return hash(user.name.toString() + user.pass.toString() + user.invkey.toString()) + hash("num" + user.id) + hash(user.invkey + user.documentid + "why")
+	},
+
     reloaduserdata() {
         saved_userdata = [];
         Object.keys(require.cache).forEach(key => { 
@@ -51,7 +89,7 @@ module.exports = { // password needs to be already hashed
                 users.forEach(user => {
                     if (user.name == name) return cancreate = false
                 })
-                console.log(pass)
+                //console.log(pass)
                 if (cancreate) {
                     var id = 0
                     id = users[users.length-1].id+1
@@ -85,9 +123,9 @@ module.exports = { // password needs to be already hashed
     },
 
     changeuserdata(uid,newdata) {
+		console.log(change_data_cooldown)
         return new Promise(function(resolve, reject) {
-            if (!change_data_cooldown) {
-                change_data_cooldown = true
+            if (data_cooldown()) {
                 module.exports.verifyuser(uid).then(user => {
                     var user_newdata = user;
                     for (let index in newdata) {
@@ -95,52 +133,44 @@ module.exports = { // password needs to be already hashed
                         datavalue = datavalue.replace(/<LINEBREAK>/g,"°&br°&")
                         datavalue = datavalue.replace(/[^\u0000-\u00ff]/g,"").replace(/</g,"").replace(/>/g,"").replace(/\//g,"")
                         if (index == "description") datavalue = datavalue.replace(/°&br°&/g,"<br>")
-                        if ((index == "displayname" || index == "description") && datavalue != "") {
+                        if ((index == "displayname" || index == "description") && datavalue.substring(3) != "") {
                             if (index == "displayname") datavalue = datavalue.substring(0,20)
-                            user_newdata[index] = datavalue
+                            if (index != "displayname" || (datavalue.replace(/ /g,"") != "")) user_newdata[index] = datavalue
                         }
                     }
                     firestore.collection("users").doc(user.documentid).set(user_newdata).then(doc => {
-                        module.exports.reloaduserdata();
+						perm_data_changes += 1;
                         resolve(user_newdata)
                     })
                 })
-                setInterval(() => {
-                    change_data_cooldown = false
-                },5000)
             }
         });
     },
 
-    rblx:{
-        verify(rblxuid) {
-            return new Promise(function(resolve, reject) {
-                module.exports.getAllUsers().then(users => {
-                    let u;
-                    if (rblxuid && rblxuid != "") users.forEach(user => {
-                        var idusr = hash(user.name.toString() + user.pass.toString() + user.invkey.toString() + hash("rblx")) + hash( "n" + user.id) + hash(user.invkey)
-                        if (rblxuid == idusr) {
-                            let userreturn = user
-                            u = userreturn
-                        }
-                    })
-                    resolve(u)
-                })
-            });
-        }
-    },
-
-    verifyuser(uid) {
+	setlastlogin(uid) {
+		module.exports.verifyuser(uid).then(user => {
+			if (user && data_cooldown()) {
+				if ( user["first-login"] == undefined) user["first-login"] = Date.now();
+				//console.log(Math.abs(user["first-login"] - user["last-login"]) / 1000 / 86400);
+				user["last-login"] = Date.now();
+				firestore.collection("users").doc(user.documentid).set(user)
+			}
+		})
+	},
+	
+    verifyuser(uid, name, pass, id) {
         return new Promise(function(resolve, reject) {
             module.exports.getAllUsers().then(users => {
                 let u;
-                if (uid && uid != "") users.forEach(user => {
-                    var idusr = hash(user.name.toString() + user.pass.toString() + user.invkey.toString()) + hash( "n" + user.id) + hash(user.invkey)
-                    if (uid == idusr) {
+                users.forEach(user => {
+                    var idusr = module.exports.createuid(user)
+					
+                    if ( (name == user.name && pass == user.pass) || uid === idusr ) {
                         let userreturn = user
                         u = userreturn
                     }
                 })
+				//console.log(u)
                 resolve(u)
             })
         });
@@ -154,9 +184,9 @@ module.exports = { // password needs to be already hashed
             module.exports.getUser(name).then(user => {
                 if (user) {
                     console.log("user found. trying to log in");
-                    uid = hash(name.toString() + pass.toString() + user.invkey.toString()) + hash("n" + user.id) + hash(user.invkey)
+                    uid = module.exports.createuid(user)
                     
-                    module.exports.verifyuser(uid, name, pass, user.id).then(verifieduser => {
+                    module.exports.verifyuser(null, name, pass, user.id).then(verifieduser => {
                         if (verifieduser) {
                             console.log(user.name + " user logged in!");
                             resolve("uid=" + uid + ";");
@@ -174,7 +204,7 @@ module.exports = { // password needs to be already hashed
             let returnuser
             module.exports.getAllUsers().then(usercontent => {
                 if (uid && uid != "") usercontent.forEach( (user, index) => {
-                    if (user.pass) var idusr = hash(user.name.toString() + user.pass.toString() + user.invkey.toString()) + hash( "n" + user.id) + hash(user.invkey)
+                    if (user.pass) var idusr = module.exports.createuid(user)
                     if (uid == idusr) {
                         returnuser = user;
                         return user;

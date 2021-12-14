@@ -7,7 +7,7 @@
     },
     {
         "name":"Beta tester",
-        "description":"One of the first's persons to create an account!",
+        "description":"One of the first's persons to create an account! or someone that tests new features.",
         "image":"__rooturl/assets/images/badges/betatester.png",
         "id":1
     },
@@ -42,8 +42,8 @@
         "id":6
     },
     {
-        "name":"Forum maniac",
-        "description":"You spend a lot of time making posts and commenting in the forum, like a forum maniac.",
+        "name":"Blog maniac",
+        "description":"You spend a lot of time making posts in the blog, like a blog maniac.",
         "image":"__rooturl/assets/images/badges/forum_maniac.png",
         "id":7
     }

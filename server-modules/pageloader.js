@@ -33,7 +33,6 @@ class loader {
                     "500templateerrorcode:" + '404',
                     "500templateerrortitle:" + (this.req.path.substring(1) + " isn't a valid page")
                 ]
-                console.log("this.templatedir = "+this.templaterdir)
             }
 
             if (fs.existsSync(this.templatedir)) dirtemplate = this.templatedir

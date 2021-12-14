@@ -4,6 +4,7 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
     if (user && user.perms.admin == true) {
+		console.log("adminpanel to @"+user.name)
         new page.loader({
             "res":res,
             "req":req,

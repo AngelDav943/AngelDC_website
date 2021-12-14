@@ -3,7 +3,7 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
 const fetch = require('node-fetch');
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
-    if (true) {
+    if (!user || (user && user.banned == false)) {
 		let jsonposts = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/posts.json`))
 		let accpromises = []
 		
@@ -32,6 +32,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 
 				let content = post.post.content
 				content = content.replace(/\n/g, " <br> ")
+				content = content.replace(/</g, "")
 
 				content = content.replace(embedRegex, string => { // embed link that has .img .jpg .gif in the end
 					let str = string.split(" ")

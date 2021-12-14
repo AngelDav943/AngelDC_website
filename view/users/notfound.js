@@ -1,5 +1,6 @@
 const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
+const inbox = require(`${__dirname}/../../server-modules/inbox.js`)
 const fetch = require('node-fetch');
 var embedRegex = /(https?:\/\/[^]+\/[^]+(.png|.jpg|.gif|.ico|.PNG))/g
 
@@ -8,7 +9,7 @@ args.shift()
 
 accounts.getUserByID(parseInt(args[0])-1).then(user => {
     accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(currentuser => {
-        if (user) {
+		if (user) {
 			let jsonposts = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/posts.json`))
 			let badges = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/badges.json`));
 
@@ -27,9 +28,9 @@ accounts.getUserByID(parseInt(args[0])-1).then(user => {
 				let profile_exists = fs.existsSync(`${__dirname}/../../assets/public/images/userprofiles/${user.id+1}.png`)
 				if (!profile_exists) profile = `__rooturl/assets/images/userprofiles/UserDefault.png`
 				
-				let background = `background:url(__rooturl/assets/images/userbackgrounds/${user.id+1}.png);`
-				let background_exists = fs.existsSync(`${__dirname}/assets/public/images/userbackgrounds/${user.id+1}.png`)
-				if (!background_exists) background = ``
+				let background = `background:url(__rooturl/assets/images/userbackgrounds/${user.id+1}.png) !important;`
+				let background_exists = fs.existsSync(`${__dirname}/../../assets/public/images/userbackgrounds/${user.id+1}.png`)
+				if (!background_exists) background = `background`
 
 				for (let online_user in users_online) {
 					if (users_online[online_user].id == user.id) {
@@ -40,7 +41,7 @@ accounts.getUserByID(parseInt(args[0])-1).then(user => {
 
 				if (user.banned == true) banstatus = "<article class='alert'><p style='right'>This person is currently banned</p></article>"
 				if (currentuser) {
-					console.log(currentuser.name +" is looking at "+ user.name +" profile.") 
+					console.log(`@${currentuser.name} looking at @${user.name}'s profile.`) 
 					if (user.id == currentuser.id) {
 						acc_config = fs.readFileSync(`${__dirname}/../../pages/users/accountconfig.html`);
 					}
@@ -51,7 +52,8 @@ accounts.getUserByID(parseInt(args[0])-1).then(user => {
 
 				if (user.badges.length > 0) badges.forEach(currentbadge => {
 					var badgeid = user.badges.findIndex(element => element == currentbadge.id)
-					if (badgeid >= 0 && currentbadge.id == badgeid) htmlbadge = `${htmlbadge} <img src="${currentbadge.image}">`
+					console.log(badgeid)
+					if (badgeid > 0 && currentbadge.id == badgeid) htmlbadge = `${htmlbadge} <img src="${currentbadge.image}">`
 				})
 				
 				if (userposts.length > 0) userposts.forEach(post => {
@@ -110,11 +112,14 @@ accounts.getUserByID(parseInt(args[0])-1).then(user => {
 
 						"onlinestatus":  isonline,
 						"onlinecolor":  onlinecolor,
+
+						"userfirstlogin": inbox.timeFromTimestamp(user["first-login"], true),
+						"userlastlogin": inbox.timeFromTimestamp(user["last-login"], true),
 						
 						"postcount":  userposts.length,
 						"userposts":  htmluserposts,
 						"badges":  htmlbadge,
-						"userbackground":  background,
+						"newuserbackground":  background,
 						"banstatus":  banstatus,
 						"isbot":  isbot
 					}

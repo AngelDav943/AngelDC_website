@@ -53,6 +53,7 @@ html.legacy section.main {
 	color:black;
 	background:#FFF;
 	border-radius: 5px;
+	width: calc(700px - 50px);
 }
 
 html.legacy #badges {
