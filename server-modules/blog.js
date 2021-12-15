@@ -4,12 +4,17 @@ let firebase = require('firebase-admin');
 let page = require(`${__dirname}/pageloader.js`);
 let accounts = require(`${__dirname}/accounts.js`);
 let saved_postdata = [];
+let posted = 0;
+let deleted = 0;
 
 const firestore = firebase.firestore();
 
 module.exports = { // password needs to be already hashed
 
 	async newPost(uid, title, content) {
+
+		if (posted > 100) return;
+
 		accounts.getUserByUID(uid).then(user => {
 			if (user) {
 
@@ -22,6 +27,7 @@ module.exports = { // password needs to be already hashed
 
 				firestore.collection("blog").add(newpost).then(() => {
 					console.log(`New post ny: @${user.name}`);
+					posted++;
 					return(true)
 				});
 			
@@ -30,6 +36,8 @@ module.exports = { // password needs to be already hashed
 	},
 
 	async deletePost(uid, timestamp) {
+		if (deleted > 100) return;
+		
 		var post_todelete = await module.exports.getPost_withTimestamp(timestamp)
 		var user = await accounts.getUserByUID(uid)
 			
@@ -37,6 +45,7 @@ module.exports = { // password needs to be already hashed
 
 			firestore.collection("blog").doc(post_todelete.documentid).delete().then(() => {
 				console.log(`New post ny: @${user.name}`);
+				deleted++;
 				return(true)
 			});
 		
