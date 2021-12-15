@@ -42,7 +42,7 @@ function data_cooldown() {
 	var returnval = change_data_cooldown
 	
 	data_changes += 1;
-	console.log(perm_data_changes)
+	
 	if (perm_data_changes > 100) {
 		return false
 	} else {
@@ -66,7 +66,6 @@ function data_cooldown() {
 		}
 	}
 
-	//console.log(!returnval, !change_data_cooldown, data_changes)
 	return !returnval
 }
 
@@ -89,7 +88,7 @@ module.exports = { // password needs to be already hashed
                 users.forEach(user => {
                     if (user.name == name) return cancreate = false
                 })
-                //console.log(pass)
+				
                 if (cancreate) {
                     var id = 0
                     id = users[users.length-1].id+1
@@ -123,7 +122,7 @@ module.exports = { // password needs to be already hashed
     },
 
     changeuserdata(uid,newdata) {
-		console.log(change_data_cooldown)
+		
         return new Promise(function(resolve, reject) {
             if (data_cooldown()) {
                 module.exports.verifyuser(uid).then(user => {
