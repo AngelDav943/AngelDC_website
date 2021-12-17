@@ -108,6 +108,7 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 							"displayname": `${user.displayname}`,
 							"username": `${user.name}`,
 							"userindex": `${user.id + 1}`,
+							"usercurrency": user.currency || 0,
 
 							"userdesc": `${user.description || "nothingness..."}`,
 							"userdescinput": `${user.description.replace(/<br>/g, String.fromCharCode(10)) || "nothingness..."}`,

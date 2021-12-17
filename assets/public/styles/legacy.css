@@ -6,7 +6,7 @@
 	text-overflow: ellipsis;
 }
 
-body {
+html {
   	background: #272727;
 	color: white;
 }
@@ -49,6 +49,7 @@ pup {
 	display: flex;
 	flex-direction: column;
 	position:absolute;
+	background-color:#696969;
 	width: 125px;
 	height:230px;
 	padding:0px;

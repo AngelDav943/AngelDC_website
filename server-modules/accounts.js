@@ -150,8 +150,18 @@ module.exports = { // password needs to be already hashed
 		module.exports.verifyuser(uid).then(user => {
 			if (user && data_cooldown()) {
 				if ( user["first-login"] == undefined) user["first-login"] = Date.now();
+				if ( user["currency"] == undefined) user["currency"] = 0
 				//console.log(Math.abs(user["first-login"] - user["last-login"]) / 1000 / 86400);
 				user["last-login"] = Date.now();
+				firestore.collection("users").doc(user.documentid).set(user)
+			}
+		})
+	},
+
+	getCurrency(uid, currency) {
+		module.exports.verifyuser(uid).then(user => {
+			if (user && data_cooldown()) {
+				user["currency"] += currency
 				firestore.collection("users").doc(user.documentid).set(user)
 			}
 		})

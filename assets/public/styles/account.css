@@ -73,7 +73,6 @@ html.legacy .sub {
 		margin: 0px -25px !important;
 		background: #2b2b2f;
 		width: calc(100% + 30px);
-		height: 70px;
 		padding:10px;
 		overflow-x: auto;
 		flex-direction: row;
@@ -87,12 +86,8 @@ html.legacy .sub {
 		width:100%;
 	}
 
-	.user#display {
-		display: block;
-	}
-
 	.user#display .profile {
-		width: 100%;
+		width: 160px;
 	}
 
 	/* Legacy theme css */
