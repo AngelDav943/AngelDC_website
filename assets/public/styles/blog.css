@@ -1,19 +1,19 @@
-article.blog_post {
+.blog_post {
 	display:flex;
 	padding:5px;
 	margin:10px 0px;
 	word-break: break-all;
 }
 
-article.blog_post img {
+.blog_post img {
 	margin-right: 10px;
 }
 
-html.dark-mode article.blog_post {
+html.dark-mode .blog_post {
 	background-color:#303033;
 	color:white;
 }
 
-html.legacy article.blog_post {
+html.legacy .blog_post {
 	padding: 10px;
 }

@@ -6,8 +6,11 @@
 	text-overflow: ellipsis;
 }
 
+body {
+    background: #272727;
+}
+
 html {
-  	background: #272727;
 	color: white;
 }
 

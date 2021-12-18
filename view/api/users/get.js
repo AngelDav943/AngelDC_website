@@ -17,6 +17,9 @@ accounts.getAllUsers().then(usrs => {
             "badges":user.badges,
             "description":user.description,
             "banned":user.banned,
+            "currency":user.currency,
+            "first-login":user["first-login"],
+            "last-login":user["last-login"],
             "hidden":user.hidden,
             "id":user.id,
             "documentid":user.documentid

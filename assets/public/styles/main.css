@@ -7,8 +7,11 @@
 	text-overflow: ellipsis;
 }
 
-html,body {
+body {
     background: #272727;
+}
+
+html,body {
    	margin: 0px;
    	min-height: 100%;
    	width: 100%;
