@@ -3,10 +3,16 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
 	if (user) console.log(user.name + " opened shop!")
+	if (user && user.perms.admin == true) {
+
+	}
+	else
+	{
+		new page.loader({
+			"res":res,
+			"req":req,
+			"template":fs.readFileSync(`${__dirname}/../../pages/noaccess.html`).toString()
+		}).load()
+	}
 })
 
-new page.loader({
-    "res":res,
-    "req":req,
-    "template":fs.readFileSync(`${__dirname}/../../pages/noaccess.html`).toString()
-}).load()

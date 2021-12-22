@@ -1,7 +1,6 @@
 let fs = require('fs');
 let firebase = require('firebase-admin');
 
-let page = require(`${__dirname}/pageloader.js`);
 let cookiemanager = require(`${__dirname}/cookies.js`);
 let hash = require("sha256");
 let saved_userdata = [];
