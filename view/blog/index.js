@@ -40,8 +40,8 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 					var embedRegex = /(https?:\/\/[^]+\/[^]+(.png|.jpg|.gif|.ico|.PNG))/g
 
 					let content = post.post.content
-					content = content.replace(/\n/g, " <br> ")
 					content = content.replace(/</g, "")
+					content = content.replace(/\n/g, " <br> ")
 
 					content = content.replace(embedRegex, string => { // embed link that has .img .jpg .gif in the end
 						let str = string.split(" ")

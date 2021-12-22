@@ -51,7 +51,7 @@
 <div class="article-maincontainer" style="">
     <li class="left">
         <article style="height:calc(100% - 40px)">
-            <p>Welcome to this website, made by <a href="__rooturl/users/1">@Angel</a>.<p>
+            <p>Welcome to angeldc943.repl.co!<p>
             <br>
             <br>
             <p>I made this website to just put tests i made with javascript and some other things, maybe i will add more things soon.</p>
@@ -61,15 +61,16 @@
 			<br>
 			<p>You can read about Andec Studios by clicking <a href="__rooturl/andec">here</a>.</p>
 			<p>Or maybe check the blog by clicking <a href="__rooturl/blog">here</a>.</p>
+			<br>
+			<p>- <a href="__rooturl/users/1">AngelDav (@Angel)</a></p>
 		</article>
 
     </li>
     <li class="right">
         <article>
             <h3>Latests updates</h3>
-            <p>Blog now public</p>
-            <p>Configuration page</p>
-            <p>Legacy theme</p>
+			<p>-Currency</p>
+			<a href="__rooturl/Leaderboard">-Leaderboard page</a>
         </article>
 
         <article>
@@ -86,7 +87,7 @@
     function reload_users() {
         fetch('__rooturl/api/users/online?repeat=false&value=name').then(userres => {
             userres.json().then(users => {
-                document.getElementById('users_online').innerHTML = users
+                document.getElementById('users_online').innerHTML = "-"+users.toString().replace(/,/g,"<br>-")
             })
         })
         setTimeout(() => {

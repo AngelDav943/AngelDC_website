@@ -5,15 +5,17 @@ var post_title = req.query.t;
 var post_content = req.query.c;
 
 
-console.log(post_title +" || "+ post_content )
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
-    if (user && user.banned == false /*&& (user.badges.find(e => { return e == 1 }) != undefined)*/ ) {
+    if (user && user.banned == false ) {
 
 		if (post_title && post_content) {
 			var postcontent = post_content.replace(/<slash-n>/g,"\n").replace(/>/,"")
 			var posttitle = post_title.replace(/>/,"").replace(/</,"")
-			if (postcontent != "" && posttitle != "") /*if (posts[posts.length-1].title != posttitle && posts[posts.length-1].content != postcontent && posts[posts.length-1].timestamp - Date.now() < -10000)*/ {
+			
+			console.log(post_title +" || "+ post_content )
+			
+			if (postcontent.replace(/ /g,"").replace(/\n/g,"") != "" && posttitle.replace(/ /g,"").replace(/\n/g,"") != "") /*if (posts[posts.length-1].title != posttitle && posts[posts.length-1].content != postcontent && posts[posts.length-1].timestamp - Date.now() < -10000)*/ {
 
 				blogmanager.newPost(
 					cookies.getCookie(req.headers.cookie, "uid"),

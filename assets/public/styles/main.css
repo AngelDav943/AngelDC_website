@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     transition: 0.1s;
-    font-family: Arial;
+    font-family: -webkit-pictograph,Arial;
     list-style-type: none;
 	text-overflow: ellipsis;
 }
@@ -89,4 +89,14 @@ img {
 @-ms-viewport {
     width: extend-to-zoom;
     zoom: 125%;
+}
+
+@media screen and (max-width: 690px) {
+	.main {
+		width: auto;
+	}
+
+	html {
+		zoom:75%;
+	}
 }

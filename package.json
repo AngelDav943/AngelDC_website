@@ -11,10 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "@replit/database": "^2.0.1",
-    "angeldav-test-pageloader": "^1.0.5",
-    "angeldav-testpackage": "^1.1.12",
+    "angeldav-test-pageloader": "^1.0.6",
+    "angeldav-testpackage": "^1.1.16",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "express-fileupload": "^1.2.1",
     "firebase-admin": "^9.12.0",
     "node-fetch": "^2.6.6",

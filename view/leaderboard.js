@@ -3,9 +3,6 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 const fetch = require(`node-fetch`);
 
 accounts.getAllUsers().then(users => {
-	users.sort(function(a, b) {
-		return parseInt(b.currency || 0) - parseInt(a.currency || 0);
-	});
 
 	var leaderboard = []
 
@@ -19,6 +16,10 @@ accounts.getAllUsers().then(users => {
 			"id":users[index].id,
 		})
 	}
+	
+	leaderboard.sort(function(a, b) {
+		return parseInt(b.currency || 0) - parseInt(a.currency || 0);
+	});
 
 	return leaderboard;
 

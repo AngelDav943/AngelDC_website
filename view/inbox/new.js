@@ -1,16 +1,9 @@
-res.send(
-	`<body style="margin:0; display:flex; justify-content:center; height:100%; align-items:center; background-color:#2f2f2f; color:white; flex-direction: column;">`+		
-		`<div>`+
-			`<img style="height:100px; width:auto;" src="https://angeldc943.repl.co/assets/images/icons/inbox.png">`+
-			`<img style="height:100px; width:auto;" src="https://static.angeldc943.repl.co/assets/images/oldmonitor.png">`+
-		`</div>`+
-		`<p style="margin:0px;">inbox messaging disabled</p>`+
-		`<p style="margin:0px; zoom:250%;">sorry!</p>`+
-	`</body>`
-)
+const accounts = require(`${__dirname}/../../server-modules/accounts.js`);
+const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
+const inbox = require(`${__dirname}/../../server-modules/inbox.js`);
 
-/*accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
-    if (user && user.banned == false) {
+accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
+    if (user && user.banned == false && user.perms.admin == true) {
 		console.log(req.query)
         if (req.query != {} && req.query.t != undefined) {
 
@@ -32,7 +25,7 @@ res.send(
 				})
 			})
         } else {
-            var npost_html = fs.readFileSync(`${__dirname}/pages/inbox/new.html`).toString();
+            var npost_html = fs.readFileSync(`${__dirname}/../../pages/inbox/new.html`).toString();
 			new page.loader({
 				"res":res,
 				"req":req,
@@ -42,5 +35,16 @@ res.send(
 				]
 			}).load()
         }
-    }
-})*/
+    } else {
+		res.send(
+			`<body style="margin:0; display:flex; justify-content:center; height:100%; align-items:center; background-color:#2f2f2f; color:white; flex-direction: column;">`+		
+				`<div>`+
+					`<img style="height:100px; width:auto;" src="https://angeldc943.repl.co/assets/images/icons/inbox.png">`+
+					`<img style="height:100px; width:auto;" src="https://static.angeldc943.repl.co/assets/images/oldmonitor.png">`+
+				`</div>`+
+				`<p style="margin:0px;">inbox messaging disabled</p>`+
+				`<p style="margin:0px; zoom:250%;">sorry!</p>`+
+			`</body>`
+		)
+	}
+})
