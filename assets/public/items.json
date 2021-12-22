@@ -1,0 +1,10 @@
+[
+	{
+		"name":"test",
+		"description":"this is a test item",
+		"limited":false,
+		"tradeable":false,
+		"cost":10,
+		"id":0
+	}
+]
