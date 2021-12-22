@@ -75,7 +75,6 @@ io.on('connection', socket => {
     eval(fs.readFileSync(`${__dirname}/events/ioconnection.js`).toString())
 });
 
-
 http.listen(3000, () => {
 	console.log('server started');
 });
