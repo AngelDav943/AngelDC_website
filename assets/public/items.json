@@ -6,5 +6,13 @@
 		"tradeable":false,
 		"cost":10,
 		"id":0
+	},
+	{
+		"name":"test limited",
+		"description":"this is a test item",
+		"limited":10,
+		"tradeable":true,
+		"cost":100,
+		"id":1
 	}
 ]
