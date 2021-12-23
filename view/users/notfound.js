@@ -10,8 +10,10 @@ args.shift()
 
 accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 	accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(currentuser => {
+		if (currentuser) console.log(`@${currentuser.name} looking at @${user.name}'s ${args[1] == '' ? "profile" : args[1]}.`)
+
 		if (user) {
-			blogmanager.getAllPosts().then(jsonposts => {
+			if (args[0]) blogmanager.getAllPosts().then(jsonposts => {
 				let badges = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/badges.json`));
 
 				let userposts = []
@@ -44,7 +46,6 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 
 					if (user.banned == true) banstatus = "<article class='alert'><p style='right'>This person is currently banned</p></article>"
 					if (currentuser) {
-						console.log(`@${currentuser.name} looking at @${user.name}'s profile.`)
 						if (user.id == currentuser.id) {
 							acc_config = fs.readFileSync(`${__dirname}/../../pages/users/accountconfig.html`);
 						}
@@ -129,6 +130,32 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 					}).load()
 				})
 			})
+
+			if (args[1] == "backpack") {
+				var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
+				var itemshtml = ""
+				console.log(user.backpack)
+				if (user.backpack) user.backpack.forEach(backpackitem => {
+					let item = items.find(obj => obj.id == backpackitem.id)
+					itemshtml += new page.templater({
+						"templatedir": `${__dirname}/../../assets/public/templates/shopitem.html`,
+						"other": {
+							"item": item,
+							"islimited":backpackitem.quantity
+						}
+					}).load() + "<br>";
+				});
+				
+				new page.loader({
+					"res":res,
+					"req":req,
+					"template":fs.readFileSync(`${__dirname}/../../pages/users/backpack.html`).toString(),
+					"other":{
+						"user.name":user.displayname,
+						"items": itemshtml
+					}
+				}).load()
+			}
 		}
 	})
 })

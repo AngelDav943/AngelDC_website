@@ -1,5 +1,4 @@
 const fs = require('fs')
-const page = require(`${__dirname}/pageloader.js`)
 let fetch = require('node-fetch');
 let notif_dir = `${__dirname}/../assets/public/notifications/`
 

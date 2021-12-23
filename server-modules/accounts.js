@@ -149,8 +149,17 @@ module.exports = { // password needs to be already hashed
 		module.exports.verifyuser(uid).then(user => {
 			if (user && data_cooldown()) {
 				if ( user["first-login"] == undefined) user["first-login"] = Date.now();
-				if ( user["currency"] == undefined) user["currency"] = 0
-				//console.log(Math.abs(user["first-login"] - user["last-login"]) / 1000 / 86400);
+				if ( user["currency"] == undefined || user["currency"] == NaN ) user["currency"] = 0
+				if ( user["last-cashout"] == undefined) user["last-cashout"] = Date.now() - 3600000
+				
+				// This gets you one coin every hour
+				var hcoin = Math.floor(Math.abs(user["last-cashout"] - Date.now()) / 3600000)
+				if ( hcoin >= 1 ) {
+					console.log(user.name +" " + hcoin)
+					user["currency"] += hcoin;
+					user["last-cashout"] = Date.now();
+				}
+				
 				user["last-login"] = Date.now();
 				firestore.collection("users").doc(user.documentid).set(user)
 			}
@@ -161,6 +170,24 @@ module.exports = { // password needs to be already hashed
 		module.exports.verifyuser(uid).then(user => {
 			if (user && data_cooldown()) {
 				user["currency"] += currency
+				firestore.collection("users").doc(user.documentid).set(user)
+			}
+		})
+	},
+
+	getItem(uid, shopid) {
+		module.exports.verifyuser(uid).then(user => {
+			var items = JSON.parse(fs.readFileSync(`${__dirname}/../assets/public/items.json`));
+			let item = items.find(obj => obj.id == shopid);
+			if (user && data_cooldown()) {
+				var useritem = user.backpack.find(obj => obj.id == shopid) 
+				var quantity = useritem == undefined ? 1 : useritem.quantity+1
+
+				user["backpack"].push({
+					"id":shopid,
+					"quantity":quantity
+				})
+				user["currency"] -= item.cost
 				firestore.collection("users").doc(user.documentid).set(user)
 			}
 		})
