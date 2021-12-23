@@ -20,6 +20,10 @@
 	border-radius: 10px;
 }
 
+.item_box.limited div{
+	background: rgb(39, 148, 35);
+}
+
 .item_box div p {
 	position: relative;
     bottom: 105%;
@@ -27,6 +31,14 @@
 	width: 100%;
 	text-align: center;
 	color: rgba(255, 255, 255, 0);
+}
+
+.item_box div p.limitedstatus {
+	height:70px;
+    bottom: 70%;
+	left:10px;
+	text-align: left;
+	color: rgba(255, 255, 255);
 }
 
 .item_box div img {
@@ -39,7 +51,7 @@
 
 /* .item_box on hover */
 .item_box:hover div {
-	background: rgb(82, 82, 82);
+	background: rgb(59, 59, 59);
 	border-radius: 5px;
 }
 
@@ -51,7 +63,7 @@
 }
 
 .item_box:hover div p.cost {
-    bottom: 60%;
+    bottom: 70%;
 	color:gold;
 	display:block;
 }

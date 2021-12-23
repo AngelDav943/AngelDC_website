@@ -1,0 +1,21 @@
+a.button {
+	color:white;
+	background-color:rgb(39, 148, 35);
+}
+
+.item .container {
+	display:flex;
+	margin: 20px 0px;
+}
+
+@media screen and (max-width: 690px) {
+	.item .container {
+		
+		zoom:150%;
+    	flex-direction: column;
+	}
+
+	.item .sub-info {
+		display: none;
+	}
+}
