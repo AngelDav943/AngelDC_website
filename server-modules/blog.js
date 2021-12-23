@@ -2,7 +2,6 @@ const fetch = require('node-fetch')
 let fs = require('fs');
 let firebase = require('firebase-admin');
 
-let page = require(`${__dirname}/pageloader.js`);
 let accounts = require(`${__dirname}/accounts.js`);
 let saved_postdata = [];
 let posted = 0;

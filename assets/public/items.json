@@ -4,6 +4,7 @@
 		"description":"this is a test item",
 		"limited":false,
 		"tradeable":false,
+		"icon_url":"https://angeldc943.repl.co/favicon.ico",
 		"cost":10,
 		"id":0
 	},
@@ -12,7 +13,14 @@
 		"description":"this is a test item",
 		"limited":10,
 		"tradeable":true,
+		"icon_url":"https://static.angeldc943.repl.co/assets/images/badges/vhs.png",
 		"cost":100,
 		"id":1
+	},
+	{
+		"name":"something",
+		"description":"non purchasable item.",
+		"icon_url":"https://static.angeldc943.repl.co/assets/images/AndecBotIcon.png",
+		"id":3
 	}
 ]

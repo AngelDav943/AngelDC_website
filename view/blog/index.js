@@ -1,12 +1,11 @@
 const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
+try {
 const blogmanager = require(`${__dirname}/../../server-modules/blog.js`);
 const fetch = require('node-fetch');
 
-
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
 	if (!user || (user && user.banned == false)) {
-		//let jsonposts = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/posts.json`))
 		blogmanager.getAllPosts().then(jsonposts => {
 			let accpromises = []
 
@@ -100,3 +99,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 		}).load()
 	}
 })
+
+}catch(err){
+	console.log(err)
+}

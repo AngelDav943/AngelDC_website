@@ -1,0 +1,65 @@
+.item_container {
+	margin: 25px 0px;
+	display: flex;
+}
+
+.item_box {
+	margin: 10px;
+	color: white;
+	text-decoration: none;
+}
+
+.item_box * {
+	transition: 0.5s;
+}
+
+.item_box div {
+	height: 100px;
+	width: 100px;
+	background: gray;
+	border-radius: 10px;
+}
+
+.item_box div p {
+	position: relative;
+    bottom: 105%;
+	height:20px;
+	width: 100%;
+	text-align: center;
+	color: rgba(255, 255, 255, 0);
+}
+
+.item_box div img {
+	object-fit: contain;
+	padding: 10px;
+	margin: 0;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+}
+
+/* .item_box on hover */
+.item_box:hover div {
+	background: rgb(82, 82, 82);
+	border-radius: 5px;
+}
+
+.item_box:hover div p.title {
+    bottom: 80%;
+	color:white;
+	display:block;
+    font-weight: bold;
+}
+
+.item_box:hover div p.cost {
+    bottom: 60%;
+	color:gold;
+	display:block;
+}
+
+.item_box:hover div img {
+	padding: 5px;
+	margin: 0;
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+	filter:brightness(50%);
+}
