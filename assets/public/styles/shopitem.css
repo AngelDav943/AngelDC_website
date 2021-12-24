@@ -3,6 +3,15 @@ a.button {
 	background-color:rgb(39, 148, 35);
 }
 
+a.button.disabled {
+	cursor: default;
+	background-color: gray;
+}
+
+a.button.disabled:hover {
+	background-color: gray;
+}
+
 .item .container {
 	display:flex;
 	margin: 20px 0px;
@@ -10,7 +19,6 @@ a.button {
 
 @media screen and (max-width: 690px) {
 	.item .container {
-		
 		zoom:150%;
     	flex-direction: column;
 	}

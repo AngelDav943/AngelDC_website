@@ -179,15 +179,32 @@ module.exports = { // password needs to be already hashed
 		module.exports.verifyuser(uid).then(user => {
 			var items = JSON.parse(fs.readFileSync(`${__dirname}/../assets/public/items.json`));
 			let item = items.find(obj => obj.id == shopid);
-			if (user && data_cooldown()) {
+			var isavailable = Date.now() < (item.limited || Date.now()+1) ? true : false
+			console.log(`${item.name} is ${isavailable ? "available" : "no longer available"}`)
+			
+			if (user && user.currency > item.cost && isavailable) {
+				if (user.backpack == undefined) user.backpack = []
 				var useritem = user.backpack.find(obj => obj.id == shopid) 
 				var quantity = useritem == undefined ? 1 : useritem.quantity+1
 
-				user["backpack"].push({
+				var newitem = {
 					"id":shopid,
 					"quantity":quantity
-				})
-				user["currency"] -= item.cost
+				}
+				
+				console.log(useritem)
+				if (useritem) {
+					let objectindex = -1
+					user.backpack.forEach((item,index) => {
+						if (item.id == newitem.id) objectindex = index
+					})
+					if (objectindex != -1) user.backpack[objectindex] = newitem
+				} else {
+					user["backpack"].push(newitem)
+				}
+
+				useritem = user.backpack.find(obj => obj.id == shopid)
+				if (useritem && useritem.quantity == quantity) user["currency"] -= item.cost
 				firestore.collection("users").doc(user.documentid).set(user)
 			}
 		})

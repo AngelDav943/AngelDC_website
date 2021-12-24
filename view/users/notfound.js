@@ -134,7 +134,7 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 			if (args[1] == "backpack") {
 				var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
 				var itemshtml = ""
-				console.log(user.backpack)
+				
 				if (user.backpack) user.backpack.forEach(backpackitem => {
 					let item = items.find(obj => obj.id == backpackitem.id)
 					itemshtml += new page.templater({
@@ -151,7 +151,10 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 					"req":req,
 					"template":fs.readFileSync(`${__dirname}/../../pages/users/backpack.html`).toString(),
 					"other":{
-						"user.name":user.displayname,
+						"user":{
+							"name": user.name,
+							"displyname":""
+						},
 						"items": itemshtml
 					}
 				}).load()

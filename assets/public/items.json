@@ -22,5 +22,11 @@
 		"icon_url":"https://static.angeldc943.repl.co/assets/images/AndecBotIcon.png",
 		"cost":30,
 		"id":2
+	},
+	{
+		"name":"THE uranium",
+		"description":"the most beautiful uranium in the world.",
+		"icon_url":"https://angeldc943.repl.co/assets/images/badges/uranium.png",
+		"id":3
 	}
 ]
