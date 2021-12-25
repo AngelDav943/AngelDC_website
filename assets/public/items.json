@@ -38,5 +38,13 @@
 		"disabled":true,
 		"cost":10,
 		"id":4
+	},
+	{
+		"name":"Traffic cone",
+		"description":"I found this traffic cone around angeldav's office.",
+		"icon_url":"https://angeldc943.repl.co/assets/images/badges/cone.png",
+		"limited":43200000,
+		"cost":35,
+		"id":5
 	}
 ]
