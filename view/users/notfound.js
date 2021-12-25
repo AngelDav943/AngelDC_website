@@ -140,6 +140,7 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 					itemshtml += new page.templater({
 						"templatedir": `${__dirname}/../../assets/public/templates/shopitem.html`,
 						"other": {
+							"item.cost":"",
 							"item": item,
 							"islimited":backpackitem.quantity
 						}

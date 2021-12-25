@@ -149,7 +149,7 @@ module.exports = { // password needs to be already hashed
 		module.exports.verifyuser(uid).then(user => {
 			if (user && data_cooldown()) {
 				if ( user["first-login"] == undefined) user["first-login"] = Date.now();
-				if ( user["currency"] == undefined || user["currency"] == NaN ) user["currency"] = 0
+				if ( user["currency"] == undefined || user["currency"] == NaN || user["currency"] < 0) user["currency"] = 25
 				if ( user["last-cashout"] == undefined) user["last-cashout"] = Date.now() - 3600000
 				
 				// This gets you one coin every hour
@@ -182,7 +182,7 @@ module.exports = { // password needs to be already hashed
 			var isavailable = Date.now() < (item.limited || Date.now()+1) ? true : false
 			console.log(`${item.name} is ${isavailable ? "available" : "no longer available"}`)
 			
-			if (user && user.currency > item.cost && isavailable) {
+			if (user && user.currency >= item.cost && isavailable) {
 				if (user.backpack == undefined) user.backpack = []
 				var useritem = user.backpack.find(obj => obj.id == shopid) 
 				var quantity = useritem == undefined ? 1 : useritem.quantity+1

@@ -2,20 +2,18 @@
 
 <article class="item" >
 	<div class="container">
-		<img src="<¡item.icon_url>" alt="" style="width:100px; height:100px;">
-		<div class="sub-info" style="margin: 10px; color:gray;">
-			<p>Name</p>
-			<p>Description</p>
-			<p>Price</p>
-		</div>
+		<img src="<¡item.icon_url>" alt="" style="width:125px; height:125px;">
 		<div class="info" style="margin: 10px;">
-			<h1><¡item.name></h1>
+			<div style="display:flex; align-items: center;">
+				<h1><¡item.name></h1>
+				<p style="color:red; zoom:75%; padding:0px 10px;"><¡timeleft></p>
+			</div>
 			<p>"<¡item.description>"</p>
-			<p style="color:gold;"><¡item.cost> Coins</p>
+			<p style="color:gold;"><¡item.cost></p>
 			<p style="color:gray; zoom:75%;"><¡availableuntil></p>
 		</div>
 	</div>
-
 	<¡purchasebutton>
+
 	
 </article>
