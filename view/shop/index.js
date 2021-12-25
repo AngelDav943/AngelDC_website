@@ -7,7 +7,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 	var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
 	var itemshtml = ""
 	items.forEach(item => {
-		if (item.cost != undefined) itemshtml += new page.templater({
+		if (item.cost != undefined && (!item.disabled)) itemshtml += new page.templater({
 			"templatedir": `${__dirname}/../../assets/public/templates/shopitem.html`,
 			"other": {
 				"item.cost":(item.cost == 0 ? "Free" : `${item.cost} Coins`),

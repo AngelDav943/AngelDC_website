@@ -30,5 +30,13 @@
 		"limited":1640365463364,
 		"cost":5,
 		"id":3
+	},
+	{
+		"name":"Hazmat",
+		"description":"Hazmat.",
+		"icon_url":"https://static.angeldc943.repl.co/assets/images/hazmat.png",
+		"disabled":true,
+		"cost":10,
+		"id":4
 	}
 ]

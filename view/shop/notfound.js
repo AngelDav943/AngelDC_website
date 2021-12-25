@@ -10,7 +10,7 @@ accounts.getUserByUID(uid).then(user => {
 	var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
 	let item = items.find(obj => obj.id == args[0]) || {"limited":false}
 
-	var isavailable = (Date.now() < (item.limited || Date.now()+1) ? true : false) && (typeof(item.cost) == "number")
+	var isavailable = (item.disabled != true) && (Date.now() < (item.limited || Date.now()+1) ? true : false) && (typeof(item.cost) == "number")
 	
 	let lefttime = (Math.floor((item.limited - Date.now()) / 36000))/100
 	let timeleft = lefttime ? ` (${Math.abs(lefttime)} hours ${lefttime < 0 ? "ago" : "left"})` : ""
@@ -34,7 +34,7 @@ accounts.getUserByUID(uid).then(user => {
 		}
 	}).load()
 	
-	if (args[1] == "buy") {
+	if (args[1] == "buy" && (!item.disabled)) {
 		accounts.getItem(uid, item.id)
 		
 		console.log(`${user.name} ${"purchased"} ${item.name}`)

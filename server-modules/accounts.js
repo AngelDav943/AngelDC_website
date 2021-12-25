@@ -179,7 +179,7 @@ module.exports = { // password needs to be already hashed
 		module.exports.verifyuser(uid).then(user => {
 			var items = JSON.parse(fs.readFileSync(`${__dirname}/../assets/public/items.json`));
 			let item = items.find(obj => obj.id == shopid);
-			var isavailable = Date.now() < (item.limited || Date.now()+1) ? true : false
+			var isavailable = (item.disabled != true) && (Date.now() < (item.limited || Date.now()+1) ? true : false)
 			console.log(`${item.name} is ${isavailable ? "available" : "no longer available"}`)
 			
 			if (user && user.currency >= item.cost && isavailable) {
