@@ -78,6 +78,14 @@ account .account {
         display: none;
     }
 
+	pup {
+		background-color:#3b3b3fff;
+		top:69px;
+		width: calc(100% - 20px);
+		height: calc(100% - 90px);
+		zoom: 150%;
+	}
+
     .hamb#header {
 		position: fixed;
 		align-items: flex-start;
@@ -88,10 +96,23 @@ account .account {
     .hamb#header nav {
         display: flex;
 		flex-direction: column;
-        width:100%;
+        width:auto;
     }
 
 	.hamb#header nav * {
         zoom:175%;
     }
+
+	header.hamb {
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	header.hamb account {
+		zoom:125%;
+		position: absolute;
+		top:0;
+		right: 50px;
+		height: auto;
+	}
 }

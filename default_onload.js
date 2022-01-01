@@ -40,6 +40,7 @@ var uid = cookies.getCookie(req.headers.cookie, "uid")
 accounts.verifyuser( uid ).then(account => {
 	let accounthtml = "<a class='btn' href='__rooturl/login'>Login</a>"
 	if (account) {		
+		accounts.setlastlogin(uid)
 		let profile = `__rooturl/assets/images/userprofiles/UserDefault.png`
 		let background = ``
 
@@ -61,9 +62,6 @@ accounts.verifyuser( uid ).then(account => {
 		other["userbackground"] = background
 
 		other["user_lastlogin"] = new Date( account["last-login"] )
-		
-		accounts.setlastlogin(uid)
-
 		other["user_currency"] = account.currency || 0
 
 		return account;

@@ -1,6 +1,5 @@
 const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
-try {
 const blogmanager = require(`${__dirname}/../../server-modules/blog.js`);
 const fetch = require('node-fetch');
 
@@ -34,7 +33,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 				let posts_html = "";
 				post_users.forEach(post => {
 					let date_timestamp = new Date(post.post.timestamp)
-					let date = date_timestamp.getDate() + '/' + (date_timestamp.getMonth()) + '/' + date_timestamp.getFullYear() + " " + date_timestamp.getHours() + ':' + date_timestamp.getMinutes();
+					let date = blogmanager.timeFromTimestamp(post.post.timestamp);//date_timestamp.getDate() + '/' + (date_timestamp.getMonth()+1) + '/' + date_timestamp.getFullYear() + " " + date_timestamp.getHours() + ':' + date_timestamp.getMinutes();
 
 					var embedRegex = /(https?:\/\/[^]+\/[^]+(.png|.jpg|.gif|.ico|.PNG))/g
 
@@ -99,7 +98,3 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 		}).load()
 	}
 })
-
-}catch(err){
-	console.log(err)
-}

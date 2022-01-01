@@ -1,6 +1,6 @@
 const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
-const inbox = require(`${__dirname}/../../server-modules/inbox.js`)
+const blog = require(`${__dirname}/../../server-modules/blog.js`)
 const blogmanager = require(`${__dirname}/../../server-modules/blog.js`)
 const fetch = require('node-fetch');
 var embedRegex = /(https?:\/\/[^]+\/[^]+(.png|.jpg|.gif|.ico|.PNG))/g
@@ -117,8 +117,8 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 							"onlinestatus": isonline,
 							"onlinecolor": onlinecolor,
 
-							"userfirstlogin": inbox.timeFromTimestamp(user["first-login"], true),
-							"userlastlogin": inbox.timeFromTimestamp(user["last-login"], true),
+							"userfirstlogin": blog.timeFromTimestamp(user["first-login"], true),
+							"userlastlogin": blog.timeFromTimestamp(user["last-login"], true),
 
 							"postcount": userposts.length,
 							"userposts": htmluserposts,
@@ -132,6 +132,11 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 			})
 
 			if (args[1] == "backpack") {
+				if (parseInt(args[2]) != NaN) {
+					let item = items.find(obj => obj.id == args[2])
+					
+					return;
+				}
 				var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
 				var itemshtml = ""
 				

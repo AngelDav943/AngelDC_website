@@ -70,7 +70,7 @@ function data_cooldown() {
 
 module.exports = { // password needs to be already hashed
 	createuid(user) {
-		return hash(user.name.toString() + user.pass.toString() + user.invkey.toString()) + hash("num" + user.id) + hash(user.invkey + user.documentid + "why")
+		return hash(user.name.toString() + user.pass.toString() + user.invkey.toString()) + hash("num" + user.id) + hash(user.invkey + user.documentid + "1angeldavwebsite")
 	},
 
     reloaduserdata() {
@@ -155,8 +155,8 @@ module.exports = { // password needs to be already hashed
 				// This gets you one coin every hour
 				var hcoin = Math.floor(Math.abs(user["last-cashout"] - Date.now()) / 3600000)
 				if ( hcoin >= 1 ) {
-					console.log(user.name +" " + hcoin)
-					user["currency"] += hcoin;
+					console.log(user.name +" " + (hcoin*2))
+					user["currency"] += hcoin*2;
 					user["last-cashout"] = Date.now();
 				}
 				

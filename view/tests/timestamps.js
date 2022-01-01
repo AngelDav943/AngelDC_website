@@ -1,7 +1,7 @@
 var date1, date2;  
 
 date1 = new Date( Date.now() );
-date2 = new Date( Date.now() + (3600000) );
+date2 = new Date( 1641013200000 );
 
 var hours = Math.floor(Math.abs(date1 - date2) / 3600000);
 

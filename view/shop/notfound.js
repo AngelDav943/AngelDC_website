@@ -8,7 +8,7 @@ var uid = cookies.getCookie(req.headers.cookie, "uid")
 accounts.getUserByUID(uid).then(user => {
 	var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
 	let item = items.find(obj => obj.id == args[0]) || { "limited": false }
-	if (user) console.log(user.name + ` opened shop item: ${item.name}!`)
+	if (user && item) console.log(user.name + ` opened shop item: ${item.name}!`)
 
 	var isavailable = (item.disabled != true) && (Date.now() < (item.limited || Date.now() + 1) ? true : false) && (typeof (item.cost) == "number")
 

@@ -1,3 +1,33 @@
+
+
+<script>
+	/*function getTimeLeft() {
+		var difference = 1641013200000 - Date.now()
+
+		const time = {
+			days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+			hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+			minutes: Math.floor((difference / 1000 / 60) % 60),
+			seconds: Math.floor((difference / 1000) % 60),
+		};
+
+		for (var t in time) {
+			if (time[t] < 10) time[t] = `0${time[t]}`
+		}
+
+		if (difference > 0) {
+        	document.getElementById('yearcountdown').innerHTML = `Year ends in: ${time.hours}:${time.minutes}:${time.seconds}!!!!!!!!!!!`
+		} else {
+			document.getElementById('yearcountdown').innerHTML = `HAPPY NEW YEAR!!!!`
+		}
+	}
+
+	getTimeLeft();
+	setInterval(() => {
+		getTimeLeft();
+    },1000)*/
+</script>
+
 <center id="Welcomeback" style="mix-blend-mode:difference; padding:50px 0px;">
     <h2 >Welcome back <a href="__rooturl/users/<¡user_id>">@<¡user_username>!</a></h2>
 </center>
@@ -91,9 +121,9 @@
                 document.getElementById('users_online').innerHTML = "-"+users.toString().replace(/,/g,"<br>-")
             })
         })
-        setTimeout(() => {
-            reload_users();
-        },5000)
+		setTimeout(() => {
+			reload_users();
+		},5000)
     }
-    reload_users();
+	reload_users();
 </script>
