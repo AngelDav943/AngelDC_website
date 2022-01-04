@@ -13,6 +13,41 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 		if (currentuser) console.log(`@${currentuser.name} looking at @${user.name}'s ${args[1] == '' ? "profile" : args[1]}.`)
 
 		if (user) {
+			if (args[1] == "backpack") {
+				var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
+				/*if (parseInt(args[2]) != NaN) {
+					let item = items.find(obj => obj.id == args[2])
+					
+					return;
+				}*/
+				var itemshtml = ""
+				if (user.backpack) user.backpack.forEach(backpackitem => {
+					let item = items.find(obj => obj.id == backpackitem.id)
+					itemshtml += new page.templater({
+						"templatedir": `${__dirname}/../../assets/public/templates/shopitem.html`,
+						"other": {
+							"item.cost":"",
+							"item": item,
+							"islimited":backpackitem.quantity
+						}
+					}).load() + "<br>";
+				});
+				
+				new page.loader({
+					"res":res,
+					"req":req,
+					"template":fs.readFileSync(`${__dirname}/../../pages/users/backpack.html`).toString(),
+					"other":{
+						"user":{
+							"name": user.name,
+							"displyname":""
+						},
+						"items": itemshtml
+					}
+				}).load()
+			}
+
+
 			if (args[0]) blogmanager.getAllPosts().then(jsonposts => {
 				let badges = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/badges.json`));
 
@@ -54,9 +89,10 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 					let htmlbadge = ''
 					let htmluserposts = ''
 
+					console.log(user.badges)
 					if (user.badges.length > 0) badges.forEach(currentbadge => {
 						var badgeid = user.badges.findIndex(element => element == currentbadge.id)
-						if (badgeid > 0 && currentbadge.id == badgeid) htmlbadge = `${htmlbadge} <img src="${currentbadge.image}">`
+						if (badgeid >= 0 && currentbadge.id == badgeid) htmlbadge = `${htmlbadge} <img src="${currentbadge.image}">`
 					})
 
 					if (userposts.length > 0) userposts.forEach(post => {
@@ -130,41 +166,6 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 					}).load()
 				})
 			})
-
-			if (args[1] == "backpack") {
-				if (parseInt(args[2]) != NaN) {
-					let item = items.find(obj => obj.id == args[2])
-					
-					return;
-				}
-				var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
-				var itemshtml = ""
-				
-				if (user.backpack) user.backpack.forEach(backpackitem => {
-					let item = items.find(obj => obj.id == backpackitem.id)
-					itemshtml += new page.templater({
-						"templatedir": `${__dirname}/../../assets/public/templates/shopitem.html`,
-						"other": {
-							"item.cost":"",
-							"item": item,
-							"islimited":backpackitem.quantity
-						}
-					}).load() + "<br>";
-				});
-				
-				new page.loader({
-					"res":res,
-					"req":req,
-					"template":fs.readFileSync(`${__dirname}/../../pages/users/backpack.html`).toString(),
-					"other":{
-						"user":{
-							"name": user.name,
-							"displyname":""
-						},
-						"items": itemshtml
-					}
-				}).load()
-			}
 		}
 	})
 })

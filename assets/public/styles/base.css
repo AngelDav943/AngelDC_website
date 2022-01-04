@@ -5,6 +5,10 @@ html,body {
    height: 100%;
 }
 
+* {
+	letter-spacing: normal;
+}
+
 article.alert {
     padding:5px;
 	color:white;

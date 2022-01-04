@@ -2,6 +2,8 @@ const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
 
 accounts.getAllUsers().then(usrs => {
+	console.log("getting users");
+	
 	let users = usrs;
 	
     let value = req.query.value;
@@ -15,9 +17,10 @@ accounts.getAllUsers().then(usrs => {
             "displayname":user.displayname,
             "perms":user.perms,
             "badges":user.badges,
-            "description":user.description,
+            "backpack":user.backpack || [],
+            "description":user.description || "",
             "banned":user.banned,
-            "currency":user.currency,
+            "currency":user.currency || 0,
             "first-login":user["first-login"],
             "last-login":user["last-login"],
             "hidden":user.hidden,
