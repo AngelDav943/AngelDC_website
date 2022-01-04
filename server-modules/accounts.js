@@ -70,7 +70,11 @@ function data_cooldown() {
 
 module.exports = { // password needs to be already hashed
 	createuid(user) {
-		return hash(user.name.toString() + user.pass.toString() + user.invkey.toString()) + hash("num" + user.id) + hash(user.invkey + user.documentid + "1angeldavwebsite")
+		return hash(user.name.toString() + user.pass.toString() + user["first-login"].toString() + user.invkey.toString()) + hash("num" + user.id) + hash(user.invkey + user.documentid + "1angeldavwebsite")
+	},
+
+	createexternaluid(user) {
+		return hash(user.name.toString() + user.external.pass.toString() + user["first-login"].toString()) + hash("num" + user.id) + hash(user.invkey  + user["first-login"].toString() + user.documentid + "2externalsource")
 	},
 
     reloaduserdata() {
@@ -229,6 +233,12 @@ module.exports = { // password needs to be already hashed
     },
     
     loginUser(req, name, pass) { // this login
+		if (name == undefined || pass == undefined) return new Promise(function(resolve, reject) {
+			resolve({
+				"error":"invalid"
+			})
+		})
+		
         return new Promise(function(resolve, reject) {
             let uid
             pass = hash(pass.hashCode().toString());

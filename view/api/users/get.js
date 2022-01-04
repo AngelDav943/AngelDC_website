@@ -1,10 +1,7 @@
-const accounts = require(`${__dirname}/../../server-modules/accounts.js`)
-const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
+const accounts = require(`${__dirname}/../../server-modules/accounts.js`);
 
-accounts.getAllUsers().then(usrs => {
-	console.log("getting users");
-	
-	let users = usrs;
+accounts.getAllUsers().then(users => {
+	//console.log("getting users");
 	
     let value = req.query.value;
     let id = req.query.id;

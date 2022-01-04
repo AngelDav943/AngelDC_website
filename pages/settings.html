@@ -31,6 +31,17 @@
     </form>
 </article>
 
+<article id="external">
+	<h3>Advanced settings</h3>
+	<script src="__rooturl/assets/scripts/hasher.js"></script>
+	<article>
+		<p>Enable external login</p>
+		<input type="text" id="Username" placeholder="Username">
+		<input type="password" id="Password" placeholder="password">
+		<input type="button" value="<¡external.status>" onclick="window.location = ('__rooturl/api/users/external/setpass?i=' + document.getElementById('Username').value + '&ts=' + document.getElementById('Password').value.hashCode()) + '&y=<¡external.statusbool>'; ">
+	</article>
+</article>
+
 <article id="themes">
 	<h3>Themes</h3>
 	<br>
