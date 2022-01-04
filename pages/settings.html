@@ -35,11 +35,14 @@
 	<h3>Advanced settings</h3>
 	<script src="__rooturl/assets/scripts/hasher.js"></script>
 	<article>
-		<p>Enable external login</p>
+		<p><¡external.status> external login</p>
 		<input type="text" id="Username" placeholder="Username">
 		<input type="password" id="Password" placeholder="password">
 		<input type="button" value="<¡external.status>" onclick="window.location = ('__rooturl/api/users/external/setpass?i=' + document.getElementById('Username').value + '&ts=' + document.getElementById('Password').value.hashCode()) + '&y=<¡external.statusbool>'; ">
+		<input type="button" value="reset external password" onclick="window.location = ('__rooturl/api/users/external/setpass?i=' + document.getElementById('Username').value + '&ts=' + document.getElementById('Password').value.hashCode()) + '&y=true'; ">
 	</article>
+		
+	<p>External password: <¡external.pass></p>
 </article>
 
 <article id="themes">

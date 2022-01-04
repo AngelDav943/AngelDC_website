@@ -70,11 +70,12 @@ function data_cooldown() {
 
 module.exports = { // password needs to be already hashed
 	createuid(user) {
-		return hash(user.name.toString() + user.pass.toString() + user["first-login"].toString() + user.invkey.toString()) + hash("num" + user.id) + hash(user.invkey + user.documentid + "1angeldavwebsite")
+		return hash(user.name.toString() + user.pass.toString() + (user["first-login"] || 0).toString() + user.invkey.toString()) + hash("num" + user.id) + hash(user.invkey + user.documentid + "1angeldavwebsite")
 	},
 
 	createexternaluid(user) {
-		return hash(user.name.toString() + user.external.pass.toString() + user["first-login"].toString()) + hash("num" + user.id) + hash(user.invkey  + user["first-login"].toString() + user.documentid + "2externalsource")
+		var ext = user.external || {"pass":"notvalid"}
+		return "ext" + hash(user.name.toString() + (ext).toString() + (user["first-login"] || 0).toString()) + hash("num" + user.id) + hash(user.invkey  + (user["first-login"] || 0).toString() + user.documentid + "2externalsource") + "id"
 	},
 
     reloaduserdata() {
@@ -267,6 +268,23 @@ module.exports = { // password needs to be already hashed
             module.exports.getAllUsers().then(usercontent => {
                 if (uid && uid != "") usercontent.forEach( (user, index) => {
                     if (user.pass) var idusr = module.exports.createuid(user)
+                    if (uid == idusr) {
+                        returnuser = user;
+                        return user;
+                    }
+                });
+            }).then( user => {
+                resolve(returnuser)
+            });
+        })
+    },
+
+	async getUserByExternalUID(uid) {
+        return new Promise(function(resolve, reject) {
+            let returnuser
+            module.exports.getAllUsers().then(usercontent => {
+                if (uid && uid != "") usercontent.forEach( (user, index) => {
+                    if (user.pass) var idusr = module.exports.createexternaluid(user)
                     if (uid == idusr) {
                         returnuser = user;
                         return user;

@@ -20,7 +20,8 @@ accounts.loginUser(req, name, pass).then(login => {
 
 		console.log("valid password and username, setting external password")
 		user.external = {}
-		if (enable == "true") user.external["pass"] = `external${Date.now()}pass`
+		var randomnum = Math.floor(Math.random()*1000000000000)
+		if (enable == "true") user.external["pass"] = `external${Date.now()}${randomnum}`
 	})
 }).then(() => {
 	res.redirect('/settings')
