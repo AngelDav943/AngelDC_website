@@ -12,12 +12,13 @@ let objects = ''
 if (args.length > 0) {
 	var bac = string_args.split('/')
 	bac.pop()
-	objects = `<a href="__rooturl/assets${bac.join('/')}">..</a><br>`
+	objects = `<a href="__rooturl/files${bac.join('/')}">..</a><br>`
 }
 
 children.forEach(file => {
-    //let name = file.replace('.js','')
-    if (file != 'index' && file != "notfound") objects += `<a href='__rooturl/assets${string_args}/${file}'>${file}</a><br>`
+    let name = file.split('.')
+	if (!name[1]) objects += `<a href='__rooturl/files${string_args}/${file}'>${file}</a><br>`
+    if (file != 'index' && file != "notfound" && name[1]) objects += `<a href='__rooturl/assets${string_args}/${file}'>${file}</a><br>`
 })
 new page.loader({
     "res":res,

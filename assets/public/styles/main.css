@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     transition: 0.1s;
-    font-family: -webkit-pictograph,Arial;
+    font-family: Arial;
     list-style-type: none;
 	text-overflow: ellipsis;
 }

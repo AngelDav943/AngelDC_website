@@ -19,4 +19,6 @@ accounts.getUserByExternalUID(extuid).then(user => {
         "id":user.id,
         "documentid":user.documentid
     })
+
+	if (!user) res.status(500)
 })

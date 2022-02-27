@@ -1,5 +1,13 @@
 {
   "files": {
+    "assets/public/damn.txt": [
+      {
+        "id": "964879c2-9c9b-4f7a-87ef-b5a080d50c8b",
+        "line": 5,
+        "version": 147,
+        "index": 147
+      }
+    ],
     "events/onload/forum/index.js": [
       {
         "id": "87967698-036d-41be-8815-7d4a44d763c7",

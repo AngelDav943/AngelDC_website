@@ -7,9 +7,17 @@ let external = {
 }
 
 accounts.getUser(external.username).then(user => {
-	if (external.pass == user.external.pass)
+	if (user && external.pass == user.external.pass)
 	{
-		console.log("valid")
+		console.log("api/external/uid _ valid")
 		res.send(accounts.createexternaluid(user));
 	}
+	else
+	{
+		console.log("api/external/uid _ invalid") //res.status(500)
+		res.send("null")
+	}
+}).then(() => {
+	if(!this.res.headersSent) res.send("null")
 })
+

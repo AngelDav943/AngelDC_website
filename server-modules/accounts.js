@@ -1,5 +1,5 @@
-let fs = require('fs');
 let firebase = require('firebase-admin');
+let fs = require('fs');
 
 let cookiemanager = require(`${__dirname}/cookies.js`);
 let hash = require("sha256");
@@ -160,6 +160,7 @@ module.exports = { // password needs to be already hashed
 				// This gets you one coin every hour
 				var hcoin = Math.floor(Math.abs(user["last-cashout"] - Date.now()) / 3600000)
 				if ( hcoin >= 1 ) {
+					hcoin = Math.min(hcoin,100) // Limit amount of coins
 					console.log(user.name +" " + (hcoin*2))
 					user["currency"] += hcoin*2;
 					user["last-cashout"] = Date.now();
@@ -311,13 +312,19 @@ module.exports = { // password needs to be already hashed
     async getUser(name) {
         return new Promise(function(resolve, reject) {
             module.exports.getAllUsers().then(users => {
+				let user = null;
                 users.forEach(currentuser => {
                     if (currentuser.name == name) {
-                        let user = currentuser;
-                        resolve(user)
+                        user = currentuser;
+                        
                     }
                 })
-            });
+				return user
+            }).then(user => {
+				console.log("getuser: ")
+				console.log(user)
+				resolve(user)
+			});
         });
     },
 

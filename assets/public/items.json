@@ -25,7 +25,7 @@
 	},
 	{
 		"name":"Uranium",
-		"description":"This uranium got mined at the andec facility complex, very radioactive.",
+		"description":"This uranium got mined at the Andec facility complex, very radioactive.",
 		"icon_url":"https://angeldc943.repl.co/assets/images/badges/uranium.png",
 		"limited":1640365463364,
 		"cost":5,
@@ -33,11 +33,11 @@
 	},
 	{
 		"name":"Hazmat",
-		"description":"Hazmat.",
+		"description":"Hazmat suit from the Andec Facility Complex. (TRAFFIC CONE NOT INCLUDED)",
 		"icon_url":"https://static.angeldc943.repl.co/assets/images/hazmat.png",
 		"disabled":false,
 		"cost":100,
-		"limited":1641418522423,
+		"limited":1641422544711,
 		"id":4
 	},
 	{
@@ -47,5 +47,17 @@
 		"limited":1640549280272,
 		"cost":35,
 		"id":5
+	},
+	{
+		"name":"big fart dont buy",
+		"description":"test item dont buy",
+		"icon_url":"https://angeldc943.repl.co/favicon.ico",
+		"disabled": true,
+		"cost":99999999999999,
+		"id":6
+	},
+	{
+		"name":"Task",
+		"description":""
 	}
 ]
