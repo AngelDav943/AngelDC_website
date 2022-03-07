@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="__rooturl/assets/styles/shop.css">
+
+<article style="display:flex; justify-content: space-between;">
+	<script>
+		function submit() {
+            var title = document.getElementById("title").value;
+            var description = document.getElementById("description").value;
+            window.location = ("__rooturl/adminpanel/new/item?n="+title+"&d="+description);
+        }
+
+		function createpreview() {
+			var title = document.getElementById("inputtitle").value;
+            var description = document.getElementById("inputdescription").value;
+            var imagesrc = document.getElementById("inputimage").value;
+            var cost = document.getElementById("inputcost").value;
+
+			document.getElementById("title").innerHTML = title
+			document.getElementById("image").src = imagesrc
+			document.getElementById("cost").innerHTML = cost + " Coins"
+		}
+	</script>
+	
+	<div id="details">
+		<p>Creating a new item as <i style="color:gray;">@<¡user_username></i></p>
+	    <br>
+	    <input style="width:100%;" type="text" id="inputtitle" placeholder="Title">
+	    <input style="width:100%;" type="text" id="inputimage" placeholder="Icon url">
+	    <input style="width:100%;" type="number" id="inputcost" placeholder="Cost">
+	    <textarea style="width:100%;" rows="5" placeholder="Content" id="inputdescription"></textarea>
+		
+		<div style="display:flex;">
+		    <input type="button" id="submit" value="submit" onclick=' submit();'>
+		    <input type="button" id="preview" value="preview" onclick=' createpreview();'>
+		</div>
+	</div>
+	
+	<div id="preview" style="margin-left: 20px;">
+		<p>Preview: </p>
+		<a class="item_box ">
+			<div>
+				<img id="image" src="https://angeldc943.repl.co/favicon.ico">
+				<p class="title" id="title">Title</p>
+				<p class="cost" id="cost">Price</p>
+				<p class="limitedstatus" id="limited"></p>
+			</div>
+		</a>
+	</div>
+    
+</article>
