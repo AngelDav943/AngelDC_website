@@ -80,10 +80,9 @@ input {
     line-height: 1.5em;
     padding: 0;
     margin: 2.5px;
-    -webkit-appearance: none;
 }
 
-input[type=button],button {
+input[type=button],input[type=submit],button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
@@ -94,7 +93,7 @@ input[type=button],button {
 }
 
 
-input[type=button]:hover, button:hover, a.simple:hover, a.button:hover,a.imagebutton:hover {
+input[type=submit]:hover,input[type=button]:hover, button:hover, a.simple:hover, a.button:hover,a.imagebutton:hover {
     border: none;
     background-color:#ff7800;
     color: #FFF;

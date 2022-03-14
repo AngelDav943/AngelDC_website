@@ -3,9 +3,12 @@
 <article style="display:flex; justify-content: space-between;">
 	<script>
 		function submit() {
-            var title = document.getElementById("title").value;
-            var description = document.getElementById("description").value;
-            window.location = ("__rooturl/adminpanel/new/item?n="+title+"&d="+description);
+            var title = document.getElementById("inputtitle").value;
+            var description = document.getElementById("inputdescription").value;
+            var limitedtime = document.getElementById("timehours").value;
+            var limiteddate = document.getElementById("timedate").value;
+            //window.location = ("__rooturl/adminpanel/new/item?n="+title+"&d="+description);
+			document.getElementById("debug").innerHTML = new Date(limiteddate + " " + limitedtime).getTime()
         }
 
 		function createpreview() {
@@ -20,19 +23,30 @@
 		}
 	</script>
 	
-	<div id="details">
-		<p>Creating a new item as <i style="color:gray;">@<¡user_username></i></p>
-	    <br>
-	    <input style="width:100%;" type="text" id="inputtitle" placeholder="Title">
-	    <input style="width:100%;" type="text" id="inputimage" placeholder="Icon url">
-	    <input style="width:100%;" type="number" id="inputcost" placeholder="Cost">
-	    <textarea style="width:100%;" rows="5" placeholder="Content" id="inputdescription"></textarea>
+	<form action="__rooturl/adminpanel/new/item">
+		<input name="title" style="width:100%;" type="text" id="inputtitle" placeholder="Title">
+	    <input name="iconurl" style="width:100%;" type="text" id="inputimage" placeholder="Icon url">
+	    <input name="cost" style="width:100%;" type="number" id="inputcost" placeholder="Cost">
+		<div style="width:100%; display:flex;">
+			<p style="padding:5px; width: 100%;">( if limited ) Available until: </p>
+			<div>
+				<input name="date" style="width: 100%;" type="date" id="timedate" placeholder="available until">
+				<input name="time" style="width: 100%;" type="time" id="timehours" placeholder="available until">
+			</div>
+		</div>
+		
+	    <input name="tradeable" type="checkbox">
+		<label for="tradeable"> Is tradeable</label>
+
+		<input name="isenabled" type="checkbox" checked>
+		<label for="isenabled"> Is enabled</label>
+	    <textarea name="description" style="width:100%;" rows="5" placeholder="Content" id="inputdescription"></textarea>
 		
 		<div style="display:flex;">
-		    <input type="button" id="submit" value="submit" onclick=' submit();'>
+		    <input type="submit" value="Submit">
 		    <input type="button" id="preview" value="preview" onclick=' createpreview();'>
 		</div>
-	</div>
+	</form>
 	
 	<div id="preview" style="margin-left: 20px;">
 		<p>Preview: </p>
@@ -47,3 +61,9 @@
 	</div>
     
 </article>
+
+<article>
+	
+</article>
+
+<p id="debug">debug text</p>

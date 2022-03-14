@@ -1,7 +1,6 @@
 const accounts = require(`${__dirname}/../../server-modules/accounts.js`);
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
-const firebase = require('firebase-admin');
-const firestore = firebase.firestore();
+const shopdb = require(`${__dirname}/../../server-modules/shop.js`);
 
 
 function getItemdata() {
@@ -24,8 +23,8 @@ function getItemdata() {
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
 
-	getItemdata().then(items => {
-		console.log(items);
+	shopdb.getdata().then(items => {
+		console.log(items.length);
 	
 		if (user) console.log(user.name + " opened dbshop!")
 		

@@ -62,8 +62,7 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 				let onlinecolor = "#f04f39"
 				let banstatus = ""
 
-				fetch(`${page.url}/api/users/online`).then(response => response.json()).then(users_online => {
-
+				function finishload(users_online) {
 					let profile = `__rooturl/assets/images/userprofiles/${user.id + 1}.png`
 					let profile_exists = fs.existsSync(`${__dirname}/../../assets/public/images/userprofiles/${user.id + 1}.png`)
 					if (!profile_exists) profile = `__rooturl/assets/images/userprofiles/UserDefault.png`
@@ -164,6 +163,12 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 							"isbot": isbot
 						}
 					}).load()
+				}
+				
+				fetch(`${page.url}/api/users/online`).then(response => response.json()).then(users_online => {
+					finishload(users_online)
+				}).catch(() => {
+					finishload([])
 				})
 			})
 		}

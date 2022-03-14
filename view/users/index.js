@@ -4,7 +4,7 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
 const fetch = require('node-fetch');
 
 accounts.getAllUsers().then(accounts => {
-	fetch(`${page.url}/api/users/online`).then(response => response.json()).then(users_online => {
+	function doload(users_online) {
 		let accnames = "<article class='grid-container'> "
 		var htmlpage = fs.readFileSync(`${__dirname}/../../pages/users/index.html`).toString(); 
 		var acctemplate = fs.readFileSync(`${__dirname}/../../assets/server/templates/user-boxtemplate.html`).toString(); 
@@ -49,5 +49,11 @@ accounts.getAllUsers().then(accounts => {
 				"accountcount": + accounts.length
 			}
 		}).load()
+	}
+	
+	fetch(`${page.url}/api/users/online`).then(response => response.json()).then(users_online => {
+		doload(users_online);
+	}).catch(() => {
+		doload([])
 	})
 })
