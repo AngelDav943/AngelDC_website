@@ -3,6 +3,8 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`)
 const blog = require(`${__dirname}/../../server-modules/blog.js`)
 const blogmanager = require(`${__dirname}/../../server-modules/blog.js`)
 const fetch = require('node-fetch');
+const shopdb = require(`${__dirname}/../../server-modules/shop.js`);
+
 var embedRegex = /(https?:\/\/[^]+\/[^]+(.png|.jpg|.gif|.ico|.PNG))/g
 
 args = url
@@ -14,37 +16,39 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 
 		if (user) {
 			if (args[1] == "backpack") {
-				var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
-				/*if (parseInt(args[2]) != NaN) {
-					let item = items.find(obj => obj.id == args[2])
+				shopdb.getdata().then(items => {
+					//var items = JSON.parse(fs.readFileSync(`${__dirname}/../../assets/public/items.json`));
+					/*if (parseInt(args[2]) != NaN) {
+						let item = items.find(obj => obj.id == args[2])
+						
+						return;
+					}*/
+					var itemshtml = ""
+					if (user.backpack) user.backpack.forEach(backpackitem => {
+						let item = items.find(obj => obj.id == backpackitem.id)
+						itemshtml += new page.templater({
+							"templatedir": `${__dirname}/../../assets/public/templates/shopitem.html`,
+							"other": {
+								"item.cost":"",
+								"item": item,
+								"islimited":backpackitem.quantity
+							}
+						}).load() + "<br>";
+					});
 					
-					return;
-				}*/
-				var itemshtml = ""
-				if (user.backpack) user.backpack.forEach(backpackitem => {
-					let item = items.find(obj => obj.id == backpackitem.id)
-					itemshtml += new page.templater({
-						"templatedir": `${__dirname}/../../assets/public/templates/shopitem.html`,
-						"other": {
-							"item.cost":"",
-							"item": item,
-							"islimited":backpackitem.quantity
+					new page.loader({
+						"res":res,
+						"req":req,
+						"template":fs.readFileSync(`${__dirname}/../../pages/users/backpack.html`).toString(),
+						"other":{
+							"user":{
+								"name": user.name,
+								"displyname":""
+							},
+							"items": itemshtml
 						}
-					}).load() + "<br>";
-				});
-				
-				new page.loader({
-					"res":res,
-					"req":req,
-					"template":fs.readFileSync(`${__dirname}/../../pages/users/backpack.html`).toString(),
-					"other":{
-						"user":{
-							"name": user.name,
-							"displyname":""
-						},
-						"items": itemshtml
-					}
-				}).load()
+					}).load()
+				})
 			}
 
 

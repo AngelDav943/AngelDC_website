@@ -29,7 +29,7 @@ module.exports = {
 	newitem(newitemdata) {
 		if (newitemdata) {
 			module.exports.getdata().then(data => {
-				console.log(data)
+				
 				if (data) firestore.collection("items").add(Object.assign({...newitemdata},{
 					"id": data.length
 				}))

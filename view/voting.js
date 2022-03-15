@@ -1,3 +1,7 @@
+// Currently disabled
+
+/*
+
 const accounts = require(`${__dirname}/../../server-modules/accounts.js`);
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 const voting = require(`${__dirname}/../../server-modules/voting.js`);
@@ -57,3 +61,4 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 
 })
 
+*/
