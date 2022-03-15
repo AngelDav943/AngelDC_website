@@ -3,8 +3,6 @@ const accounts = require(`${__dirname}/../../server-modules/accounts.js`);
 const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 const shopdb = require(`${__dirname}/../../server-modules/shop.js`);
 
-// TODO: Connect firestore database to item creation page
-
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
     if (user && user.perms.admin == true) {
 		console.log(req.query)
