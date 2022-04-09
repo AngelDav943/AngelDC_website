@@ -324,8 +324,6 @@ module.exports = { // password needs to be already hashed
                 })
 				return user
             }).then(user => {
-				console.log("getuser: ")
-				console.log(user)
 				resolve(user)
 			});
         });

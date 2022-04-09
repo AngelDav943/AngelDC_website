@@ -34,7 +34,6 @@ page.default.codeDir = `${__dirname}/default_onload.js`
 
 app.get('/api/users/online', (req, res) => {
 	if (req.query.page) var requestedpage = req.query.page.split('/')[0];
-	let repeat = req.query.repeat || "false";
 	let value = req.query.value;
 	let id = req.query.id;
 	let onlinepeople = []
