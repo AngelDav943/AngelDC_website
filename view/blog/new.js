@@ -4,8 +4,6 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 var post_title = req.query.t;
 var post_content = req.query.c;
 
-
-
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
     if (user && user.banned == false ) {
 

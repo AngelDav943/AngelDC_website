@@ -39,6 +39,7 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 					new page.loader({
 						"res":res,
 						"req":req,
+						"title":`@${user.name}'s backpack`,
 						"template":fs.readFileSync(`${__dirname}/../../pages/users/backpack.html`).toString(),
 						"other":{
 							"user":{
@@ -140,7 +141,7 @@ accounts.getUserByID(parseInt(args[0]) - 1).then(user => {
 					new page.loader({
 						"res": res,
 						"req": req,
-						"title": `@${user.name}`,
+						"title": `@${user.name}'s profile`,
 						"basetemplate": `${__dirname}/../../assets/server/basetemplates/blogstyle.html`,
 						"template": fs.readFileSync(`${__dirname}/../../pages/users/users.html`).toString(),
 						"other": {

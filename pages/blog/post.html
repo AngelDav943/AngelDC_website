@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="__rooturl/assets/styles/blog.css">
+<div id="blog_config" style="display:flex; justify-content:space-between;">
+	<p>Blog</p>
+	<¡admin_panel>
+</div>
+
+<div id="blog_main">
+	<¡post>
+	<p>Comments: </p>
+	<div style="display:flex;">
+		<textarea style="width:90%; resize:vertical;" class="changedesc" rows='2' id='insertdescription'></textarea>
+		<input type='button' value='Submit' onclick="window.location = ('__rooturl/blog/comment?did=<¡postdata.documentid>&tim=<¡postdata.timestamp>&c='+document.getElementById('insertdescription').value.replace(new RegExp(String.fromCharCode(10),'g'), '<LINEBREAK>'));">
+	</div>
+	<br>
+	<¡comments>
+</div>

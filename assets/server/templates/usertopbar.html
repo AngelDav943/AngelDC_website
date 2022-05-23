@@ -4,13 +4,17 @@
 			<p><¡userdisplay></p>
 			<p>@<¡username></p>
 		</div>
-		<img src="<¡profile>" alt="profile picture" style="width:51px; height:51px;">
+		<div style="width:51px; height:51px;">
+			<img src="<¡profile>" alt="profile picture" style="margin:0px; width:51px; height:51px;">
+			<¡notification>
+		</div>
 	</div>
 </account>
 <pup id="popup" class="hidden">
 	<a class="btn" style="padding:10px; background:#4a4a4a4f;"><¡user_currency> Coins</a>
 	<a class="btn" href="__rooturl/users/<¡userid>">Profile</a>
+	<a class="btn" href="__rooturl/notifications">Notifications</a>
 	<a class="btn" href="__rooturl/users/<¡userid>/backpack">Backpack</a>
 	<a class="btn" href="__rooturl/settings">Settings</a>
 	<a class="btn" style="color:red;" onclick="document.cookie = 'uid=0;path=/'; window.location.reload()">Log out</a>
-</pup>
+</pup>  

@@ -44,6 +44,7 @@ accounts.getAllUsers().then(accounts => {
 		new page.loader({
 			"res":res,
 			"req":req,
+			"title":"Users",
 			"template": (htmlpage + accnames),
 			"other":{
 				"accountcount": + accounts.length

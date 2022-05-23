@@ -27,10 +27,8 @@ accounts.getAllUsers().then(users => {
 	var boardpromises = []
 	rawleaderboard.forEach(user => {
 		boardpromises.push(new Promise((resolve, reject) => {
-			fetch(`${page.url}/api/users/getpfp?id=${user.id+1}`).then(res => res.text()).then(image => {
-				user.pfp = image
-				resolve(user)
-			})
+			user.pfp = `${page.url}/api/users/getpfp?id=${user.id+1}`
+			resolve(user)
 		}))
 	});
 

@@ -48,6 +48,7 @@ accounts.getUserByUID(uid).then(user => {
 		if (args[0] && !args[1]) new page.loader({
 			"res": res,
 			"req": req,
+			"title":"Shop",
 			"template": (item["name"] ? fs.readFileSync(`${__dirname}/../../pages/shop/notfound.html`).toString() : ""),
 			"other": {
 				"item.cost": (item.cost != 0 ? `${item.cost} Coins` : "Free"),

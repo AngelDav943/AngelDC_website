@@ -16,13 +16,22 @@ function setTheme() {
 }
 
 function create(account,profile) {
+	var notifdata = (account.notifications || {})
+	var notifhtml = ""
+	var notiflength = 0
+	for (i in notifdata) {
+		if (!notifdata[i].read) notiflength++;
+	}
+	if (notiflength > 0) notifhtml = `<p class="notification">${notiflength}</p>`
+	
 	return new templater({
 		"templatedir":`${__dirname}/../../assets/server/templates/usertopbar.html`,
 		"other":{
 			"userdisplay": account.displayname,
 			"userid": (account.id+1),
 			"username": account.name,
-			"profile": profile || 'https://angeldc943.repl.co/assets/images/userprofiles/UserDefault.png'
+			"profile": profile || 'https://angeldc943.repl.co/assets/images/userprofiles/UserDefault.png',
+			"notification": notifhtml
 		}
 	}).load();
 }

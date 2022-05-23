@@ -1,7 +1,9 @@
 const firebase = require('firebase-admin');
 const firestore = firebase.firestore();
 
+
 const accounts = require(`${__dirname}/accounts.js`);
+const fetch = require(`node-fetch`);
 let saved_postdata = [];
 let posted = 0;
 let deleted = 0;
@@ -59,6 +61,38 @@ module.exports = {
 		})
 	},
 
+	async newComment(uid, documentid, content) {
+		accounts.getUserByUID(uid).then(user => {
+			if (user) {
+				if (!emoji_rejex.test(content)) content = content.replace(/[^\u0000-\u00ff]/g, "")
+
+				if (content == "") return;
+
+				//let message = encodeURIComponent(`${user.displayname} *@${user.name}*  made a post in the blog \n **Title: ** ${title}  \n`)
+
+				var newcomment = {
+					"user": user.id,
+					"content": content,
+					"timestamp": Date.now()
+				}
+
+				firestore.collection("blog").doc(documentid).get().then(documentSnapshots => {
+					let data = documentSnapshots.data();
+					if (data.comments == undefined) data.comments = []
+					
+					data.comments.push(newcomment);
+
+					console.log(data)
+
+					firestore.collection("blog").doc(documentid).set(data).then(doc => {
+						posted++;
+                    })
+				});
+
+			}
+		})
+	},
+
 	async deletePost(uid, timestamp) {
 		if (deleted > 100) return;
 
@@ -100,11 +134,17 @@ module.exports = {
 
 	async getPost_withTimestamp(timestamp) {
 		return new Promise(async (resolve, reject) => {
+			var post = null
 			var posts = await module.exports.getAllPosts();
 
 			for (let index in posts) {
-				if (posts[index].timestamp == timestamp) resolve(posts[index])
+				if (posts[index].timestamp == timestamp) {
+					post = posts[index]
+					resolve(post)
+				}
 			}
+
+			if (!post) resolve(null);
 		})
 	}
 }

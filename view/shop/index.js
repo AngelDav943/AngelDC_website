@@ -24,6 +24,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 		new page.loader({
 			"res":res,
 			"req":req,
+			"title":"Shop",
 			"template":fs.readFileSync(`${__dirname}/../../pages/shop/index.html`).toString(),
 			"other":{
 				"items": itemshtml

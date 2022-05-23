@@ -181,6 +181,47 @@ module.exports = { // password needs to be already hashed
 		})
 	},
 
+	
+
+	"notification":{
+		new(id, title, content, redirect) {
+			module.exports.getUserByID(id).then(user => {
+				var newtimestamp = Date.now()
+				user["notifications"] = (user["notifications"] || {})
+				user["notifications"][newtimestamp] = {
+					"title":title,
+					"content":content,
+					"redirect":redirect,
+					"read":false,
+					"timestamp":newtimestamp
+				}
+				firestore.collection("users").doc(user.documentid).set(user)
+			})
+		},
+
+		read(uid, timestamp) {
+			module.exports.verifyuser(uid).then(user => {
+				if (user.notifications == undefined) return;
+
+				if (user.notifications[timestamp] != undefined) {
+					user.notifications[timestamp].read = !user.notifications[timestamp].read
+					firestore.collection("users").doc(user.documentid).set(user)
+				}
+			})
+		},
+
+		remove(uid, timestamp) {
+			module.exports.verifyuser(uid).then(user => {
+				if (user.notifications == undefined) return;
+
+				if (user.notifications[timestamp] != undefined) {
+					delete user.notifications[timestamp]
+					firestore.collection("users").doc(user.documentid).set(user)
+				}
+			})
+		}
+	},
+
 	getItem(uid, shopid) {
 		let shopdb = require(`${__dirname}/shop.js`);
 		module.exports.verifyuser(uid).then(user => {

@@ -6,7 +6,7 @@ if (id) {
 	let profile_exists = fs.existsSync(`${__dirname}/../../assets/public/images/userprofiles/${id}.png`)
     if (profile_exists) profile = `${page.url}/assets/images/userprofiles/${id}.png`
 
-	res.send(profile)
+	res.redirect(profile)
 } else {
 	res.send("user id not valid")
 }

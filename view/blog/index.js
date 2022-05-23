@@ -13,13 +13,11 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 					accounts.getUserByID(jsonposts[index].user).then(userdata => {
 						return userdata
 					}).then(postuser => {
-						fetch(`${page.url}/api/users/getpfp?id=${jsonposts[index].user + 1}`).then(res => res.text()).then(image => {
-							resolve({
-								"timestamp": index,
-								"account": postuser,
-								"pfp": image,
-								"post": jsonposts[index]
-							})
+						resolve({
+							"timestamp": index,
+							"account": postuser,
+							"pfp": `${page.url}/api/users/getpfp?id=${jsonposts[index].user + 1}`,
+							"post": jsonposts[index]
 						})
 					})
 				}))
@@ -55,8 +53,10 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 						return returnstr
 					})
 
-					let admin_options = ""
-					if (user) if (user.perms.admin == true || post.account.id == user.id) admin_options = `<a href="__rooturl/blog/delete?id=${post.account.id}&timestamp=${post.post.timestamp}">delete</a>`
+					var amountcomment = 0
+					if (post.post.comments) amountcomment = post.post.comments.length
+					let admin_options = `<a href="__rooturl/blog/${post.post.timestamp}">comments (${amountcomment})</a><br>`
+					if (user) if (user.perms.admin == true || post.account.id == user.id) admin_options += `<a href="__rooturl/blog/delete?id=${post.account.id}&timestamp=${post.post.timestamp}">delete</a>`
 
 					let htmlpost = new page.templater({
 						"templatedir": `${__dirname}/../../assets/server/templates/blogpost.html`,
@@ -75,7 +75,6 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 				})
 
 				let admin_panel = ""
-
 				if (user && user.perms.comment == true) admin_panel = `<a href="__rooturl/blog/new">New post</a>`
 
 				new page.loader({

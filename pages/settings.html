@@ -11,9 +11,7 @@
 	<br>
 	<div>
 		<p>Description: </p>
-		<textarea style="width:100%;" class="changedesc" rows='10' id='insertdescription'>
-			<¡description>
-		</textarea>
+		<textarea style="width:100%; resize:vertical;" class="changedesc" rows='10' id='insertdescription'><¡description></textarea>
 	</div>
 	<input type='button' value='Submit' onclick="window.location = ('__rooturl/api/users/changeuserdata?name=description&value='+document.getElementById('insertdescription').value.replace(new RegExp(String.fromCharCode(10),'g'), '<LINEBREAK>'));">
 	<br>
