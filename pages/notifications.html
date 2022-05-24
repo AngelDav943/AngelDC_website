@@ -1,8 +1,13 @@
 <link rel="stylesheet" href="__rooturl/assets/styles/notifications.css">
-<div id="blog_config" style="display:flex; justify-content:space-between;">
+<div style="display:flex; justify-content:space-between;">
 	<p>@<¡user_username>'s notifications inbox</p>
-	<¡amount_notif>
+	<p>Unread: <¡amount_notif></p>
 </div>
-<div id="blog_main">
+<br>
+<div id="config" style="display:flex;">
+	<a class="simple" href="__rooturl/notifications/read?timestamp=<¡alltimestamps>&value=true">Mark all as read</a>
+	<a class="simple" href="__rooturl/notifications/read?timestamp=<¡alltimestamps>&value=false">Unmark all as read</a>
+</div>
+<div id="inbox_main">
 	<¡posts>
 </div>

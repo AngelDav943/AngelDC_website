@@ -82,6 +82,12 @@ input {
     margin: 2.5px;
 }
 
+textarea {
+	background: white;
+	border: none;
+	border-radius: 5px;
+}
+
 input[type=button],input[type=submit],button {
     cursor: pointer;
     border: none;

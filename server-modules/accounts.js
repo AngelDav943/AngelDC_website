@@ -199,12 +199,15 @@ module.exports = { // password needs to be already hashed
 			})
 		},
 
-		read(uid, timestamp) {
+		read(uid, timestamp, status) {
 			module.exports.verifyuser(uid).then(user => {
 				if (user.notifications == undefined) return;
 
 				if (user.notifications[timestamp] != undefined) {
-					user.notifications[timestamp].read = !user.notifications[timestamp].read
+					var readstatus = !user.notifications[timestamp].read
+					if (status != undefined) readstatus = status
+					
+					user.notifications[timestamp].read = readstatus
 					firestore.collection("users").doc(user.documentid).set(user)
 				}
 			})

@@ -52,7 +52,7 @@ module.exports = {
 
 				firestore.collection("blog").add(newpost).then(() => {
 					console.log(`New post ny: @${user.name}`);
-					fetch("https://angeldavs-testbot.angeldc943.repl.co/sendmessage/921427188417450044/" + message);
+					fetch("https://angeldavtestbot.angeldc943.repl.co/sendmessage/921427188417450044/" + message);
 					posted++;
 					return (true)
 				});

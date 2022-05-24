@@ -47,7 +47,8 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 			"template": fs.readFileSync(`${__dirname}/../../pages/notifications.html`).toString(),
 			"other": {
 				"posts": posts_html,
-				"amount_notif":notifamount
+				"amount_notif":notifamount,
+				"alltimestamps":Object.keys(user.notifications).join(",")
 			}
 		}).load()
 	} else {

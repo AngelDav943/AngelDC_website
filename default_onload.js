@@ -22,7 +22,7 @@ function create(account,profile) {
 	for (i in notifdata) {
 		if (!notifdata[i].read) notiflength++;
 	}
-	if (notiflength > 0) notifhtml = `<p class="notification">${notiflength}</p>`
+	if (notiflength > 0) notifhtml = `<p class="notification">${notiflength >= 9 ? "9+" : notiflength}</p>`
 	
 	return new templater({
 		"templatedir":`${__dirname}/../../assets/server/templates/usertopbar.html`,
