@@ -19,7 +19,7 @@ function create(account,profile) {
 	var notifdata = (account.notifications || {})
 	var notifhtml = ""
 	var notiflength = 0
-	for (i in notifdata) {
+	for (var i in notifdata) {
 		if (!notifdata[i].read) notiflength++;
 	}
 	if (notiflength > 0) notifhtml = `<p class="notification">${notiflength >= 9 ? "9+" : notiflength}</p>`

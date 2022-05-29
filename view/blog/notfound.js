@@ -57,7 +57,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 	            if (post.comments != null && post.comments.length > 0) for (let index in post.comments) {
 					commenters.push(new Promise((resolve, reject) => {
 						accounts.getUserByID(post.comments[index].user).then(userdata => {
-							console.log(index)
+							//console.log(index)
 							resolve({
 								"user": {
 									"name":userdata.name,
@@ -71,7 +71,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 				}
 				
 				Promise.all(commenters).then(allcommenters => {
-					console.log(post.comments)
+					//console.log(post.comments)
 					if (post.comments) for (var i = 0; i < allcommenters.length; i++) {
 						var comment = allcommenters[i]
 				    	comments_html += new page.templater({

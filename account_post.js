@@ -1,5 +1,11 @@
-const accounts = require(`${__dirname}/server-modules/accounts.js`)
-const cookies = require(`${__dirname}/server-modules/cookies.js`)
+const accounts = require(`${__dirname}/server-modules/accounts.js`);
+const cookies = require(`${__dirname}/server-modules/cookies.js`);
+
+const sharp = require("sharp");
+sharp.cache(false);
+
+var gm = require('gm')/*.subClass({imageMagick: true})*/;
+
 String.prototype.hashCode=function(seed=0){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<this.length;i++){ch=this.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0);};
 
 app.post(`/newaccount`, async (req, res) => {
@@ -24,11 +30,29 @@ app.post(`/setavatar`, async (req, res) => {
                         message: 'No file uploaded'
                     });
                 } else {
+					var pathtoimage = `${__dirname}/assets/public/images/userprofiles/${user.id+1}.png`
                     //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
                     let avatar = req.files.file;
                     
                     //Use the mv() method to place the file in upload directory (i.e. "uploads")
-                    avatar.mv(`${__dirname}/assets/public/images/userprofiles/${user.id+1}.png`);
+                    //avatar.mv(pathtoimage);
+					
+					// resize avatar
+					/*gm(avatar).resize(150, 150).write(pathtoimage, (err) => {
+					  	if (!err) console.log('done resizing image');
+						if (err) console.log(err)
+					});*/
+
+					/*sharp(avatar).resize({
+				    	width: 150,
+				    	height: 150,
+				    }).write(pathtoimage);*/
+
+					/*let buffer = await sharp(avatar).resize(150, 150, {
+				    	fit: sharp.fit.inside,
+				    }).toBuffer();
+				  	
+					sharp(buffer).toFile(pathtoimage);*/
 
                     //send response
                     console.log({
@@ -40,6 +64,7 @@ app.post(`/setavatar`, async (req, res) => {
                             size: avatar.size
                         }
                     });
+					 
                 }
             } catch (err) {
                 console.log(err);
