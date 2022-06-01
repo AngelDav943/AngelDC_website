@@ -7,9 +7,10 @@ args = url
 args.shift()
 
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
+	
 	if (!user || (user && user.banned == false)) {
 		blogmanager.getPost_withTimestamp(args[0]).then(post => {
-			accounts.getUserByID(post.user).then(postaccount => {
+			if (post) accounts.getUserByID(post.user).then(postaccount => {
 				if (!post) return res.redirect(`${page.url}/blog`);
 				
 				let date_timestamp = new Date(post.timestamp)
@@ -74,6 +75,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 					//console.log(post.comments)
 					if (post.comments) for (var i = 0; i < allcommenters.length; i++) {
 						var comment = allcommenters[i]
+						let commentdate = blogmanager.timeFromTimestamp(comment.comment.timestamp);
 				    	comments_html += new page.templater({
 					    	"templatedir": `${__dirname}/../../assets/public/templates/comment.html`,
 					    	"other": {
@@ -84,7 +86,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 									"id": ( comment.user.id + 1 )
 		    					},
 		    	    			"content": comment.comment.content.replace(/</g,""),
-	    	    				"date": "date"
+	    	    				"date": commentdate
 		    	    		}
 		    		    }).load();
 					}

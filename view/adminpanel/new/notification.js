@@ -6,30 +6,17 @@ const shopdb = require(`${__dirname}/../../server-modules/shop.js`);
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
     if (user && user.perms.admin == true) {
 		console.log(req.query)
+		var title = req.query.title
+		var content = req.query.content
+		var redirect = req.query.redirect
 
-		if (req.query.title != null && req.query.cost != null && parseInt(req.query.cost).toString() != "NaN") {
-			/*var optionaldata = {
-				"tradeable": false
-			}
+		if (title != null && content != null && redirect != null && req.query.username != null) {
 			
-			if (req.query.date != '' && req.query.time != '' && req.query.date != null) {
-				var timestamp = new Date(req.query.date + " " + req.query.time).getTime()
-				optionaldata["limited"] = parseInt(timestamp)
-			}
+			accounts.getUser(req.query.username).then(targetuser => {
+				if (targetuser) accounts.notification.new(targetuser.id, title, content, redirect)
+			})
 
-			if (req.query.tradeable == 'on') optionaldata["tradeable"] = true
-			if (req.query.isenabled == null) optionaldata["disabled"] = true
-			
-			var newitem = Object.assign({
-				"name": req.query.title,
-				"cost": parseInt(req.query.cost),
-				"icon_url": req.query.iconurl,
-				"description": req.query.description,
-				"publisher": user.id
-			}, optionaldata)
-
-			console.log(newitem)
-			shopdb.newitem(newitem)*/
+			res.redirect(`${page.url}/adminpanel/new/notification`)
 			
 		} else {
 			console.log("adminpanel/new/item @"+user.name)

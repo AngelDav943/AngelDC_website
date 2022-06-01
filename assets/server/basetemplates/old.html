@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+		<meta charset="utf-8">
+		<title>__pagetitle: AngelDC943</title>
+		<link rel="stylesheet" href="__rooturl/assets/styles/input.css">
+        <link rel="stylesheet" href="__rooturl/assets/styles/themes/old/input.css">
+        <link rel="stylesheet" href="__rooturl/assets/styles/themes/old/main.css">
+		<link rel="stylesheet" href="__rooturl/assets/styles/base.css">
+
+		<script src="__rooturl/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io();
+            socket.on("connected", (token) => {
+                document.cookie = 'token='+token+';'
+            })
+        </script>
+    </head>
+
+    <body>
+        <header id="header">
+			<nav>
+				<img style="float: left;" src="__rooturl/favicon.ico" alt="icon">
+				<a href="__rooturl">Home</a>
+				<a href="__rooturl/users">Accounts</a>
+				<a href="__rooturl/shop">Shop</a>
+				<a href="__rooturl/blog">Blog</a>
+			</nav>
+			<div>
+				<¡usertopbar>
+			</div>
+        </header>
+
+
+        <section class="main dark-mode" id="main">
+	        <center>
+	            <img style="height:100px;" src="__rooturl/favicon.ico" alt="website logo">
+	        </center>
+
+			<¿templatesectionmain>
+
+        </section>
+
+        <br>
+
+        <footer style="overflow: hidden;">
+            <p>AngelDav943 website</p>
+        </footer>
+
+    </body>
+
+</html>

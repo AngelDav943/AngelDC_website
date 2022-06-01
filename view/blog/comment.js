@@ -18,7 +18,8 @@ accounts.getUserByUID(uid).then(user => {
 				`@${user.name} commented on your post: <br> "${content.replace(/</g, "")}"`,
 				`blog/${timestamp}`
 			)
+		}).then(() => {
+			res.redirect(`${page.url}/blog/${timestamp}`);
 		})
-		res.redirect(`${page.url}/blog/${timestamp}`);
 	}
 })

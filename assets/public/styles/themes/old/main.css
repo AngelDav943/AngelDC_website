@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    transition: 0.1s;
+    font-family: Arial;
+    list-style-type: none;
+	color: white;
+}
+
+body {
+    background: #272727;
+    zoom: 150%;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    float: center;
+    background: #222222;
+    color: white;
+    text-align: center;
+}
+
+header {
+	position: fixed;
+	top: 0;
+    background: #3d3d3d;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+    width: 100%;
+	height: 45px;
+	overflow: hidden;
+  	list-style: none;
+	display: flex;
+	justify-content: space-between;
+}
+
+header nav {
+	display: flex;
+}
+
+header img {
+	margin: 5px;
+    height: 35px;
+	width: 35px;
+}
+
+div li {
+    float: left;
+}
+
+.main {
+    max-width: 700px;
+	min-width: 0px;
+	width: 90%;
+	margin: 20px auto;
+	margin-top: 60px;
+}
+
+.main article {
+    padding: 20px;
+    background:#FFF;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: black;
+}
+
+.dark-mode article{
+    background-color: #3d3d3d;
+    color: white;
+}
+
+account {
+	cursor: pointer;
+}
+
+account .top_profile img {
+	height: 45px !important;
+	width: 45px !important;
+}
+
+account .top_username {
+	padding: 2px 0px !important;
+}
+
+account .account {
+	display: flex;
+}
+
+
+pup.hidden {
+	display:none;
+}
+
+pup {
+	display: flex;
+	flex-direction: column;
+	position:fixed;
+	background-color:#3b3b3fc4;
+	right:0px;
+	top:45px;
+	width: 155px;
+}
+
+pup a.btn {
+	padding: 13px 10px;
+	margin: 0;
+	border-radius: 0px;
+}

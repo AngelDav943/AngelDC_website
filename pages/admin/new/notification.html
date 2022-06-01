@@ -35,7 +35,8 @@
             var title = document.getElementById("title").value;
             var content = document.getElementById("content").value;
             var user = document.getElementById("toUSER").value;
-            window.location = ("__rooturl/inbox/new?u="+user+"&t="+title+"&c="+content);
+            var redirect = document.getElementById("redirect").value;
+            window.location = ("__rooturl/adminpanel/new/notification?username="+user+"&title="+title+"&content="+content+"&redirect="+redirect);
         }
 	</script>
     <div class="post-container" style="">
@@ -43,7 +44,7 @@
         <input style="width:90%;" type="text" id="title" placeholder="title">
         <br>
         <textarea style="width:90%; resize:vertical;" rows="5" placeholder="content" id="content"></textarea>
-        <input style="width:90%;" type="text" id="title" placeholder="redirect">
+        <input style="width:90%;" type="text" id="redirect" placeholder="redirect">
     </div>
     <div class="topic-container" style="">
         <label for="topics">From: <i style="color:gray;">@<¡user_username></i></label>

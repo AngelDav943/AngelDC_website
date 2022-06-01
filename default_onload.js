@@ -12,6 +12,11 @@ function setTheme() {
 			mode = "main legacy"
 			htmltemplate = fs.readFileSync(`${__dirname}/../../assets/server/basetemplates/legacy.html`).toString()
 			break;
+
+		case "old":
+			mode = "main old"
+			htmltemplate = fs.readFileSync(`${__dirname}/../../assets/server/basetemplates/old.html`).toString()
+			break;
 	}
 }
 

@@ -361,9 +361,8 @@ module.exports = { // password needs to be already hashed
             module.exports.getAllUsers().then(users => {
 				let user = null;
                 users.forEach(currentuser => {
-                    if (currentuser.name == name) {
+                    if (currentuser.name.toString().toLowerCase() == name.toString().toLowerCase()) {
                         user = currentuser;
-                        
                     }
                 })
 				return user
