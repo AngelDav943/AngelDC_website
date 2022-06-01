@@ -58,8 +58,8 @@
             return data.text()
         }).then(html => {
             let name = arg.user.split('<;userseparator;>')
-            let message = html.replace(/<content>/g,arg.message).replace(/<userdisplay>/g,name[0]).replace(/<user>/g,name[1])
-            message = message.replace(/<userid>/g,arg.userid).replace(/<accprofile>/g,arg.accprofile)
+            let message = html.replace(/<¡content>/g,arg.message).replace(/<¡user.displayname>/g,name[0]).replace(/<¡user.name>/g,name[1])
+            message = message.replace(/<¡user.id>/g,arg.userid).replace(/<¡user.image>/g,arg.accprofile).replace(/<¡date>/g,"")
             document.getElementById('chat_container').innerHTML += message
             document.getElementById('chat_container').scrollTop = document.getElementById('chat_container').scrollHeight;
         })
