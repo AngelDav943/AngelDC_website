@@ -44,10 +44,17 @@
 </article>
 
 <article id="themes">
-	<h3>Themes</h3>
+	<h3>Customize Website</h3>
 	<br>
 	<div>
+		<p><¡background.status> custom background</p>
+		<input type="button" value="<¡background.status>" onclick='background("<¡background.buttonstatus>")'>
+	</div>
+	<br>
+	<div>
+		<p>Themes</p>
 		<input type="button" value="Default" onclick='theme("")'>
+		<input type="button" value="Default Light" onclick='theme("light")'>
 		<input type="button" value="Minimalist Dark" onclick='theme("old")'>
 		<input type="button" value="Legacy" onclick='theme("legacy")'>
 	</div>
@@ -55,6 +62,12 @@
 
 <script src="__rooturl/assets/scripts/coookie.js"></script>
 <script>
+function background(status) {
+	let modecookie = getCookie(document.cookie,"background")
+	document.cookie = `background=${status};`;
+	window.location = document.URL
+}
+	
 function theme(colorname) {
 	let modecookie = getCookie(document.cookie,"theme")
 	document.cookie = `theme=${colorname};`;

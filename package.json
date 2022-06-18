@@ -13,6 +13,7 @@
     "@replit/database": "^2.0.1",
     "angeldav-test-pageloader": "^1.0.6",
     "angeldav-testpackage": "^1.2.4",
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "express-fileupload": "^1.2.1",

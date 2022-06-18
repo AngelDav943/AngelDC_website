@@ -12,10 +12,10 @@ accounts.getUserByUID(uid).then(user => {
 		blogmanager.getPost_withTimestamp(timestamp).then(post => {
 			if (!post) return;
 			blogmanager.newComment(uid, documentid, content)
-			accounts.notification.new(
+			if (post.user != user.id) accounts.notification.new(
 				post.user,
 				`New comment on your post "${post.title}"`,
-				`@${user.name} commented on your post: <br> "${content.replace(/</g, "")}"`,
+				`@${user.name} commented on your post: <br> "${content.replace(/<LINEBREAK>/g,"\n").replace(/</g, "").replace(/\n/g," <br> ")}"`,
 				`blog/${timestamp}`
 			)
 		}).then(() => {

@@ -1,0 +1,17 @@
+<article>
+	<div style="width:100%; text-align: justify; text-justify: inter-word;" id="channel"></div>
+	<script>
+		var token = function(lgth) {
+			var rand = function() {
+			return Math.random().toString(36).substr(2); // remove `0.`
+			};
+			hash = ""
+			for (i = 0; i < lgth; i++) { // to make it longer
+				let r = rand()
+				hash = hash + r;
+			}
+			return hash; 
+		};
+		document.getElementById("channel").innerHTML = "<p>"+token(58)+"</p>"+"<p>"+token(58)+"</p>"+"<p>"+token(58)+"</p>"+"<p>"+token(58)+"</p>"
+	</script>
+</article>

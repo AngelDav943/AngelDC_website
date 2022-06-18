@@ -34,6 +34,36 @@ article article {
     border-radius: 0px;
 }
 
+.comment {
+	display: flex;
+	padding:2px 0px;
+	overflow: hidden;
+}
+
+.comment img.profile {
+	border-radius:100%;
+	object-fit:cover;
+	height:40px;
+	width:40px;
+}
+
+.comment p.content {
+    color: #2e2e2e;
+    font-size: 90%;
+}
+
+.dark-mode .comment p.content {
+	color:#c3c3c3;
+}
+
+.comment a {
+	color: black !important;
+}
+
+.dark-mode .comment a {
+	color: #ffffff !important;
+}
+
 *::-webkit-scrollbar {
   width: 12px;
 }

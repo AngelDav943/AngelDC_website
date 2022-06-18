@@ -8,6 +8,10 @@
 }
 
 body {
+    background: #eff3ff;
+}
+
+.dark-mode body {
     background: #272727;
 }
 
@@ -56,11 +60,14 @@ article {
     border-radius: 10px;
     color: black;
     overflow: auto;
-    border-color: #4e4e52;
-    border-style: solid;
+    border-style: none;
+	border-color: #00000000;
 }
 
-
+.dark-mode article {
+    border-style: solid;
+    border-color: #4e4e52;
+}
 
 header img {
     height: 35px;
@@ -77,8 +84,6 @@ img {
     background-color: #3d3d41;
     color: white;
 }
-
-
 
 @viewport {
     zoom: 1.0;

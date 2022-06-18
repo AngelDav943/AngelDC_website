@@ -17,6 +17,10 @@ function setTheme() {
 			mode = "main old"
 			htmltemplate = fs.readFileSync(`${__dirname}/../../assets/server/basetemplates/old.html`).toString()
 			break;
+
+		case "light":
+			mode = "main"
+			break;
 	}
 }
 
@@ -62,8 +66,8 @@ accounts.verifyuser( uid ).then(account => {
         if (profile_exists) profile = `__rooturl/assets/images/userprofiles/${account.id+1}.png`
 
 		let background_exists = fs.existsSync(`${__dirname}/../../assets/public/images/userbackgrounds/${account.id+1}.png`)
-        if (background_exists) background = `background: url(__rooturl/assets/images/userbackgrounds/${account.id+1}.png);`
-
+        if (background_exists && String(cookies.getCookie(req.headers.cookie, "background")) == "undefined") background = `background: url(__rooturl/assets/images/userbackgrounds/${account.id+1}.png);`
+		
 		accounthtml = create(account,profile)
 		
 		resolve()

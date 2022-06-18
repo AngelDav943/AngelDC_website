@@ -19,6 +19,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 				var embedRegex = /(https?:\/\/[^]+\/[^]+(.png|.jpg|.gif|.ico|.PNG))/g
 	
 				let content = post.content
+				content = content.replace(/<LINEBREAK>/g, "\n")
 				content = content.replace(/</g, "")
 				content = content.replace(/\n/g, " <br> ")
 				
@@ -85,7 +86,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 	        	                    "displayname": comment.user.displayname,
 									"id": ( comment.user.id + 1 )
 		    					},
-		    	    			"content": comment.comment.content.replace(/</g,""),
+		    	    			"content": comment.comment.content.replace(/<LINEBREAK>/g, "\n").replace(/</g,"").replace(/\n/g, " <br> "),
 	    	    				"date": commentdate
 		    	    		}
 		    		    }).load();

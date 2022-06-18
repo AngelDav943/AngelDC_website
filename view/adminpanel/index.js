@@ -11,8 +11,7 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
             "basetemplate":`${__dirname}/../../assets/server/basetemplates/blogstyle.html`,
             "template":fs.readFileSync(`${__dirname}/../../pages/admin/index.html`).toString(),
             "other":{
-                "peopleonline": (JSON.stringify(users_online).replace('},',"<br>")),
-                "sidebarsection": fs.readFileSync(`${__dirname}/../../pages/admin/sidebar.html`).toString()
+                "peopleonline": (JSON.stringify(users_online).replace('},',"<br>"))
 			}
         }).load()
     } else {

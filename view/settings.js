@@ -4,7 +4,8 @@ const cookies = require(`${__dirname}/../../server-modules/cookies.js`);
 accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user => {
     if (user) {
 		if (user.external == undefined) user.external = {}
-		var extpass = ""
+		var hasbackground = String(cookies.getCookie(req.headers.cookie, "background")) == "undefined"
+		var extpass = "DISABLED"
 		if (Object.keys(user.external).length !== 0 && user.external.pass != undefined) extpass = user.external.pass
         new page.loader({
             "res":res,
@@ -16,6 +17,10 @@ accounts.getUserByUID(cookies.getCookie(req.headers.cookie, "uid")).then(user =>
 					"status": (Object.keys(user.external).length === 0 ? "enable" : "disable"),
 					"statusbool": Object.keys(user.external).length === 0,
 					"pass": extpass
+				},
+				"background":{
+					"status": (hasbackground ? "disable" : "enable"),
+					"buttonstatus": (hasbackground ? "false" : "undefined")
 				}
 			}//String.fromCharCode(09)
         }).load()

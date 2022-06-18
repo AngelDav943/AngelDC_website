@@ -4,6 +4,10 @@
     flex-direction: column;
 	margin: -26px -25px;
 	padding: 10px;
+	background: linear-gradient(0deg, #00000f00 0%, #e5e5ff 25%, #ffffff 100%);
+}
+
+.dark-mode #badges {
 	background: linear-gradient(0deg, #00000f00 0%, #2b2b2f 25%, #2b2b2f 100%);
 }
 

@@ -13,9 +13,14 @@ section.main {
     width: 765px;
     margin: 87px auto;
     max-width: calc(100% - 50px);
-    color:white;
 	padding: 20px 25px;
-	background: linear-gradient(0deg, #181818ed, #282828);
+	color:black;
+	background : linear-gradient(0deg, #d6d8e1ed, #f1f1f1);
+}
+
+.dark-mode section.main {
+    color:white;
+	background: linear-gradient(0deg, #181818ed, #282828);	
 }
 
 @media screen and (max-width: 800px) {

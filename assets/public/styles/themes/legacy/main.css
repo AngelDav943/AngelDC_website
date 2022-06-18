@@ -73,6 +73,21 @@ account .account {
 	display: flex;
 }
 
+account .notification {
+	position: relative;
+    bottom: 25px;
+    background: red;
+    width: 10px;
+    height: 10px;
+    text-align: center;
+    color: white;
+    left: 30px;
+    padding: 6px;
+    padding-top: 2px;
+    padding-bottom: 9px;
+    border-top-left-radius: 10px;
+}
+
 header a {
 	padding: 10px 20px;
 	margin:5px;

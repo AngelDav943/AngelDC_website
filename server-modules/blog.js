@@ -1,6 +1,6 @@
 const firebase = require('firebase-admin');
 const firestore = firebase.firestore();
-
+const axios = require('axios');
 
 const accounts = require(`${__dirname}/accounts.js`);
 const fetch = require(`node-fetch`);
@@ -51,8 +51,12 @@ module.exports = {
 				}
 
 				firestore.collection("blog").add(newpost).then(() => {
-					console.log(`New post ny: @${user.name}`);
-					fetch("https://angeldavtestbot.angeldc943.repl.co/sendmessage/921427188417450044/" + message);
+					console.log(`New post: @${user.name}`);
+					axios.post(process.env.blog_webhook,{
+				    	username: `Blog, @${user.name}`,
+				    	avatar_url: `https://angeldc943.repl.co/api/users/getpfp?id=${newpost.user + 1}`,
+				    	content: `${user.displayname} made a new post! \n Title: **${title}** \n https://angeldc943.repl.co/blog/${newpost.timestamp}`
+				    })
 					posted++;
 					return (true)
 				});
@@ -68,8 +72,6 @@ module.exports = {
 
 				if (content == "") return;
 
-				//let message = encodeURIComponent(`${user.displayname} *@${user.name}*  made a post in the blog \n **Title: ** ${title}  \n`)
-
 				var newcomment = {
 					"user": user.id,
 					"content": content,
@@ -81,8 +83,7 @@ module.exports = {
 					if (data.comments == undefined) data.comments = []
 					
 					data.comments.push(newcomment);
-
-					console.log(data)
+					//console.log(data)
 
 					firestore.collection("blog").doc(documentid).set(data).then(doc => {
 						posted++;

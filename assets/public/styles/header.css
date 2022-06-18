@@ -2,7 +2,7 @@ header {
 	z-index: 1;
 	zoom:100%;
  	background-repeat:repeat;
-	color: #bcbcbc;
+	color: #111111;
 	font-weight: 600;
 	height:104px;
 	overflow: hidden;
@@ -12,7 +12,12 @@ header {
     align-items: center;
 	padding: 0px 25px;
     width:calc(100% - 50px);
-	background-image: url("https://static.angeldc943.repl.co/loop.png");
+	background-image: url("https://angeldc943.repl.co/assets/images/lighter_loop.png");
+}
+
+.dark-mode header {
+	background-image: url("https://angeldc943.repl.co/assets/images/loop.png");
+	color: #bcbcbc;
 }
 
 header nav {
@@ -23,6 +28,10 @@ header a.btn {
 	zoom:125%;
 	text-decoration: none;
 	padding: 10px;
+	color: #111111;
+}
+
+.dark-mode a.btn {
 	color: #bcbcbc;
 }
 
@@ -47,12 +56,16 @@ pup {
 	display: flex;
 	flex-direction: column;
 	position:fixed;
-	background-color:#3b3b3fc4;
+	background-color: #f9f9ffc4;
 	right:0px;
 	top:104px;
 	width: 155px;
 	height:230px;
 	padding:10px;
+}
+
+.dark-mode pup {
+	background-color: #3b3b3fc4;
 }
 
 pup a.btn {
